@@ -1,0 +1,117 @@
+﻿@model List<erpv01.Controllers.UretimController.OperatorDto>
+
+@{
+    ViewData["Title"] = "Üretim Bildirme - 1";
+    Layout = "_Layout";
+}
+
+<div class="container-fluid mt-3">
+
+    <!-- Operatör Seçimi -->
+    <div class="row mb-3">
+        <div class="col-12 col-md-4">
+            <label class="fw-semibold mb-1">Operatör Seçimi</label>
+            <select id="operatorSelect" class="form-select">
+                <option value="">-- Operatör Seçin --</option>
+
+                @foreach (var op in Model)
+                {
+                    <option value="@op.Kod"
+                            data-tezgah="@op.CalisabilecegiTezgahlar">
+                        @op.Ad
+                    </option>
+                }
+            </select>
+        </div>
+    </div>
+
+
+    <!-- Bekleyen İş Emirleri Grid Alanı (başta boş) -->
+    <div class="row">
+        <div class="col-12">
+            <div id="bekleyenGrid" style="height: calc(100vh - 220px); width: 100%;"></div>
+        </div>
+    </div>
+
+</div>
+
+
+@section Scripts {
+    <script>
+
+        document.getElementById("operatorSelect").addEventListener("change", function () {
+            const kod = this.value;
+
+            if (!kod) {
+                // Grid’i temizle
+                if (window.bekleyenGrid) {
+                    window.bekleyenGrid.resetData([]);
+                }
+                return;
+            }
+
+            const tezgahStr = this.selectedOptions[0].getAttribute("data-tezgah") || "";
+            const tezgahlar = tezgahStr.split("|");
+
+            console.log("Operatör:", kod, "Tezgahlar:", tezgahlar);
+
+            // AJAX → Bekleyen iş emirlerini al
+            fetch("/Uretim/BekleyenIsEmirleri", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    operatorKod: kod,
+                    tezgahlar: tezgahlar
+                })
+            })
+            .then(r => r.json())
+            .then(res => {
+
+                if (res.success !== true) {
+                    showToast(res.message || "İş emirleri alınamadı!", "error");
+                    return;
+                }
+
+                // Grid kurulu değilse: kur
+                if (!window.bekleyenGrid) {
+
+                    const kolonlar = [
+                        { header: "İş Emri No", name: "isEmriNo", width: 120 },
+                        { header: "Kalem", name: "kalemKodu", width: 80 },
+                        { header: "Operasyon", name: "kaynakKod", width: 120 },
+                        { header: "Operasyon Adı", name: "kaynakAdi", minWidth: 150 },
+                        { header: "Mamül Kod", name: "mamulKod", width: 130 },
+                        { header: "Mamül Adı", name: "mamulAdi", minWidth: 200 },
+                        { header: "Birim", name: "mamulBirim", width: 80 },
+                        { header: "Özellik", name: "mamulOzellik", minWidth: 150 }
+                    ];
+
+                    window.bekleyenGrid = liste_gridi_olustur("bekleyenGrid", res.data, kolonlar, {
+                        filtreleme: true,
+                        siralama: true,
+                        temizle: true,
+                        sutunSecimi: true,
+                        secim: true,
+                        toplam: false,
+                        excel: false,
+                        sabitKolonSayisi: 0,
+                        bodyHeight: 'fitToParent'
+                    });
+
+                } else {
+                    // Kurulu grid → sadece data güncelle
+                    window.bekleyenGrid.resetData(res.data);
+                }
+
+                showToast("İş emirleri yüklendi.", "success");
+
+            })
+            .catch(err => {
+                console.error(err);
+                showToast("Sunucu hatası!", "error");
+            });
+
+        });
+
+    </script>
+}

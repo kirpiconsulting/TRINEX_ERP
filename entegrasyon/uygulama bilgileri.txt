@@ -1,0 +1,1 @@
+Scaffold-DbContext "Server=DESKTOP-0ID8PJD\SQLEXPRESS;Database=DB_BARTEZ;User Id=sa;Password=123;TrustServerCertificate=True" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models/Entities -ContextDir Data -Context "AppDbContext" -Force

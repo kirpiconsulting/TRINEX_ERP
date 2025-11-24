@@ -1,0 +1,89 @@
+﻿@model List<erpv01.Controllers.SatisController.SatisListeDto>
+
+@{
+    ViewData["Title"] = "Satış Siparişleri";
+    Layout = "_Layout";
+}
+
+<div class="container-fluid mt-3 mb-3">
+
+    <!-- Üst Toolbar -->
+    <div class="row mb-2">
+        <div class="col-12">
+            <div id="listeToolbar"></div>
+        </div>
+    </div>
+
+    <!-- Grid -->
+    <div class="card shadow-sm border-0">
+        <div class="card-body p-0">
+            <div id="grid" style="height: calc(100vh - 180px); width: 100%;"></div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    // ---------------------------------------------------------------------
+    // 1) BUTONLARI OLUŞTUR (Senin eski toolbar buton yapın aynen korunuyor)
+    // ---------------------------------------------------------------------
+    liste_ekrani_butonlari_olustur("listeToolbar", {
+        fonksiyonlar: [
+            { ad: "Toplu Onay", action: "onayla" }
+        ],
+        ciktilar: [
+            { ad: "PDF Yazdır", action: "pdf" }
+        ]
+    });
+
+    // ---------------------------------------------------------------------
+    // 2) CONTROLLER'DAN GELEN VERİ (camelCase serialize!)
+    // ---------------------------------------------------------------------
+    var tabloVerileri = @Html.Raw(
+        System.Text.Json.JsonSerializer.Serialize(
+            Model,
+            new System.Text.Json.JsonSerializerOptions {
+                PropertyNamingPolicy = System.Text.Json.JsonNamingPolicy.CamelCase
+            }
+        )
+    );
+
+    console.log("Tablo Verileri:", tabloVerileri);
+
+    // ---------------------------------------------------------------------
+    // 3) GRID SÜTUNLARI
+    // ---------------------------------------------------------------------
+    var tabloSutunlari = [
+        { header: 'Evrak No', name: 'evrakNo', width: 120 },
+        { header: 'Tarih', name: 'tarih', width: 120 },
+        { header: 'Cari Kodu', name: 'cariKodu', width: 120 },
+        { header: 'Cari Ünvanı', name: 'cariUnvani', minWidth: 200 }
+    ];
+
+    // ---------------------------------------------------------------------
+    // 4) GRID OLUŞTUR
+    // ---------------------------------------------------------------------
+    window.myGrid = liste_gridi_olustur("grid", tabloVerileri, tabloSutunlari, {
+        filtreleme: true,
+        siralama: true,
+        excel: true,
+        temizle: true,
+        sutunSecimi: true,
+        secim: false,
+        toplam: false,
+        sabitKolonSayisi: 0,
+        bodyHeight: 'fitToParent'
+    });
+});
+
+// -------------------------------------------------------------------------
+// 5) BUTON EVENTLERİ
+// -------------------------------------------------------------------------
+function btnYeniClick() { alert("Yeni"); }
+function btnKaydetClick() { alert("Kaydet"); }
+
+</script>
+}
