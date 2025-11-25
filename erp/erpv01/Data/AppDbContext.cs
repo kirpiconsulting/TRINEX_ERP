@@ -44,6 +44,8 @@ public partial class AppDbContext : DbContext
 
     public virtual DbSet<SatisSiparisleri> SatisSiparisleris { get; set; }
 
+    public virtual DbSet<StokMiktarlari> StokMiktarlaris { get; set; }
+
     public virtual DbSet<Stoklar> Stoklars { get; set; }
 
     public virtual DbSet<SureKayitlari> SureKayitlaris { get; set; }
@@ -51,6 +53,10 @@ public partial class AppDbContext : DbContext
     public virtual DbSet<SureKayitlariKalemleri> SureKayitlariKalemleris { get; set; }
 
     public virtual DbSet<SureKayitlariOperatorler> SureKayitlariOperatorlers { get; set; }
+
+    public virtual DbSet<SysAlanAciklamalari> SysAlanAciklamalaris { get; set; }
+
+    public virtual DbSet<SysAlanAciklamalariKalemleri> SysAlanAciklamalariKalemleris { get; set; }
 
     public virtual DbSet<Tezgahlar> Tezgahlars { get; set; }
 
@@ -1056,6 +1062,56 @@ public partial class AppDbContext : DbContext
                 .HasColumnName("toplam_tutar");
         });
 
+        modelBuilder.Entity<StokMiktarlari>(entity =>
+        {
+            entity.ToTable("stok_miktarlari", "dbo");
+
+            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.AktifMi).HasColumnName("aktif_mi");
+            entity.Property(e => e.DepoKod)
+                .HasMaxLength(100)
+                .HasColumnName("depo_kod");
+            entity.Property(e => e.EkAlan1).HasColumnName("ek_alan_1");
+            entity.Property(e => e.EkAlan10).HasColumnName("ek_alan_10");
+            entity.Property(e => e.EkAlan2).HasColumnName("ek_alan_2");
+            entity.Property(e => e.EkAlan3).HasColumnName("ek_alan_3");
+            entity.Property(e => e.EkAlan4).HasColumnName("ek_alan_4");
+            entity.Property(e => e.EkAlan5).HasColumnName("ek_alan_5");
+            entity.Property(e => e.EkAlan6).HasColumnName("ek_alan_6");
+            entity.Property(e => e.EkAlan7).HasColumnName("ek_alan_7");
+            entity.Property(e => e.EkAlan8).HasColumnName("ek_alan_8");
+            entity.Property(e => e.EkAlan9).HasColumnName("ek_alan_9");
+            entity.Property(e => e.GuncellemeTarihi).HasColumnName("guncelleme_tarihi");
+            entity.Property(e => e.GuncelleyenKullanici)
+                .HasMaxLength(100)
+                .HasColumnName("guncelleyen_kullanici");
+            entity.Property(e => e.OlusturanKullanici)
+                .HasMaxLength(100)
+                .HasColumnName("olusturan_kullanici");
+            entity.Property(e => e.OlusturmaTarihi).HasColumnName("olusturma_tarihi");
+            entity.Property(e => e.StokBirim)
+                .HasMaxLength(10)
+                .IsUnicode(false)
+                .IsFixedLength()
+                .HasColumnName("stok_birim");
+            entity.Property(e => e.StokKod)
+                .HasMaxLength(100)
+                .HasColumnName("stok_kod");
+            entity.Property(e => e.StokMiktar)
+                .HasColumnType("decimal(18, 4)")
+                .HasColumnName("stok_miktar");
+            entity.Property(e => e.Tarih1).HasColumnName("tarih_1");
+            entity.Property(e => e.Tarih10).HasColumnName("tarih_10");
+            entity.Property(e => e.Tarih2).HasColumnName("tarih_2");
+            entity.Property(e => e.Tarih3).HasColumnName("tarih_3");
+            entity.Property(e => e.Tarih4).HasColumnName("tarih_4");
+            entity.Property(e => e.Tarih5).HasColumnName("tarih_5");
+            entity.Property(e => e.Tarih6).HasColumnName("tarih_6");
+            entity.Property(e => e.Tarih7).HasColumnName("tarih_7");
+            entity.Property(e => e.Tarih8).HasColumnName("tarih_8");
+            entity.Property(e => e.Tarih9).HasColumnName("tarih_9");
+        });
+
         modelBuilder.Entity<Stoklar>(entity =>
         {
             entity.ToTable("stoklar", "dbo");
@@ -1367,6 +1423,136 @@ public partial class AppDbContext : DbContext
             entity.Property(e => e.ToplamSure)
                 .HasColumnType("decimal(10, 4)")
                 .HasColumnName("toplam_sure");
+        });
+
+        modelBuilder.Entity<SysAlanAciklamalari>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__sys_alan__3213E83FBCC24A34");
+
+            entity.ToTable("sys_alan_aciklamalari", "dbo");
+
+            entity.HasIndex(e => e.Evrakno, "UX_sys_alan_aciklamalari_evrakno").IsUnique();
+
+            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.Aciklama1)
+                .HasMaxLength(250)
+                .HasColumnName("aciklama1");
+            entity.Property(e => e.Aciklama2)
+                .HasMaxLength(250)
+                .HasColumnName("aciklama2");
+            entity.Property(e => e.Aciklama3)
+                .HasMaxLength(250)
+                .HasColumnName("aciklama3");
+            entity.Property(e => e.Aciklama4)
+                .HasMaxLength(250)
+                .HasColumnName("aciklama4");
+            entity.Property(e => e.Aciklama5)
+                .HasMaxLength(250)
+                .HasColumnName("aciklama5");
+            entity.Property(e => e.Evrakno)
+                .HasMaxLength(50)
+                .HasColumnName("evrakno");
+            entity.Property(e => e.GuncellemeTarihi)
+                .HasColumnType("datetime")
+                .HasColumnName("guncelleme_tarihi");
+            entity.Property(e => e.GuncelleyenKullanici)
+                .HasMaxLength(50)
+                .HasColumnName("guncelleyen_kullanici");
+            entity.Property(e => e.OlusturanKullanici)
+                .HasMaxLength(50)
+                .HasColumnName("olusturan_kullanici");
+            entity.Property(e => e.OlusturmaTarihi)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime")
+                .HasColumnName("olusturma_tarihi");
+            entity.Property(e => e.ReferansMetin1)
+                .HasMaxLength(250)
+                .HasColumnName("referans_metin1");
+            entity.Property(e => e.ReferansMetin2)
+                .HasMaxLength(250)
+                .HasColumnName("referans_metin2");
+            entity.Property(e => e.ReferansMetin3)
+                .HasMaxLength(250)
+                .HasColumnName("referans_metin3");
+            entity.Property(e => e.ReferansMetin4)
+                .HasMaxLength(250)
+                .HasColumnName("referans_metin4");
+            entity.Property(e => e.ReferansMetin5)
+                .HasMaxLength(250)
+                .HasColumnName("referans_metin5");
+            entity.Property(e => e.ReferansSayi1)
+                .HasColumnType("decimal(18, 4)")
+                .HasColumnName("referans_sayi1");
+            entity.Property(e => e.ReferansSayi2)
+                .HasColumnType("decimal(18, 4)")
+                .HasColumnName("referans_sayi2");
+            entity.Property(e => e.ReferansSayi3)
+                .HasColumnType("decimal(18, 4)")
+                .HasColumnName("referans_sayi3");
+            entity.Property(e => e.ReferansSayi4)
+                .HasColumnType("decimal(18, 4)")
+                .HasColumnName("referans_sayi4");
+            entity.Property(e => e.ReferansSayi5)
+                .HasColumnType("decimal(18, 4)")
+                .HasColumnName("referans_sayi5");
+            entity.Property(e => e.ReferansTarih1)
+                .HasColumnType("datetime")
+                .HasColumnName("referans_tarih1");
+            entity.Property(e => e.ReferansTarih2)
+                .HasColumnType("datetime")
+                .HasColumnName("referans_tarih2");
+            entity.Property(e => e.ReferansTarih3)
+                .HasColumnType("datetime")
+                .HasColumnName("referans_tarih3");
+            entity.Property(e => e.ReferansTarih4)
+                .HasColumnType("datetime")
+                .HasColumnName("referans_tarih4");
+            entity.Property(e => e.ReferansTarih5)
+                .HasColumnType("datetime")
+                .HasColumnName("referans_tarih5");
+        });
+
+        modelBuilder.Entity<SysAlanAciklamalariKalemleri>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__sys_alan__3213E83FCEA0BC3F");
+
+            entity.ToTable("sys_alan_aciklamalari_kalemleri", "dbo");
+
+            entity.HasIndex(e => e.Evrakno, "IX_sys_alan_aciklamalari_kalemleri_evrakno");
+
+            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.Aciklama)
+                .HasMaxLength(500)
+                .HasColumnName("aciklama");
+            entity.Property(e => e.Evrakno)
+                .HasMaxLength(50)
+                .HasColumnName("evrakno");
+            entity.Property(e => e.FieldAdi)
+                .HasMaxLength(150)
+                .HasColumnName("field_adi");
+            entity.Property(e => e.GuncellemeTarihi)
+                .HasColumnType("datetime")
+                .HasColumnName("guncelleme_tarihi");
+            entity.Property(e => e.GuncelleyenKullanici)
+                .HasMaxLength(50)
+                .HasColumnName("guncelleyen_kullanici");
+            entity.Property(e => e.MaxUzunluk).HasColumnName("max_uzunluk");
+            entity.Property(e => e.OlusturanKullanici)
+                .HasMaxLength(50)
+                .HasColumnName("olusturan_kullanici");
+            entity.Property(e => e.OlusturmaTarihi)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime")
+                .HasColumnName("olusturma_tarihi");
+            entity.Property(e => e.VarsayilanDeger)
+                .HasMaxLength(200)
+                .HasColumnName("varsayilan_deger");
+            entity.Property(e => e.VeriTuru)
+                .HasMaxLength(50)
+                .HasColumnName("veri_turu");
+            entity.Property(e => e.Zorunlu)
+                .HasDefaultValue(false)
+                .HasColumnName("zorunlu");
         });
 
         modelBuilder.Entity<Tezgahlar>(entity =>

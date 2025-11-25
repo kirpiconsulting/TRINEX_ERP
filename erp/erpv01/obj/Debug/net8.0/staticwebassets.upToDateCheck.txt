@@ -1,8 +1,5 @@
-wwwroot\css\erp_bilesenleri.css
 wwwroot\css\site.css
 wwwroot\favicon.ico
-wwwroot\images\logo.png
-wwwroot\js\erp_bilesenleri.js
 wwwroot\js\site.js
 wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css
 wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css.map
@@ -61,4 +58,7 @@ wwwroot\lib\jquery\dist\jquery.js
 wwwroot\lib\jquery\dist\jquery.min.js
 wwwroot\lib\jquery\dist\jquery.min.map
 wwwroot\lib\jquery\LICENSE.txt
+wwwroot\images\logo.png
+wwwroot\css\erp_bilesenleri.css
+wwwroot\js\erp_bilesenleri.js
 wwwroot\ornek.txt

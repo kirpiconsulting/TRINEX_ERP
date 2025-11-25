@@ -19,5 +19,6 @@
   "periyot_dakika_receteler": "30",
   "periyot_dakika_recete_kalemleri": "30",
   "periyot_dakika_sistem_stok_birimleri": "30",
-  "periyot_dakika_lot_seri_tanimlari": "30"
+  "periyot_dakika_lot_seri_tanimlari": "30",
+  "periyot_dakika_lot_stok_miktarlari": "30"
 }
