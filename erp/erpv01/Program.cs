@@ -28,7 +28,7 @@ namespace erpv01
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
+           // app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.UseRouting();
