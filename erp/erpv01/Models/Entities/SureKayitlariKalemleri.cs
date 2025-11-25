@@ -64,4 +64,12 @@ public partial class SureKayitlariKalemleri
     public DateTime? GuncellemeTarihi { get; set; }
 
     public string? GuncelleyenKullanici { get; set; }
+
+    public string? UretimDeposuKodu { get; set; }
+
+    public string? TuketimDeposuKodu { get; set; }
+
+    public string? YanUrunDeposuKodu { get; set; }
+
+    public string? FireDeposuKodu { get; set; }
 }

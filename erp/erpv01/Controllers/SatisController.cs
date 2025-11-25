@@ -140,6 +140,12 @@ namespace erpv01.Controllers
                     .Select(r => r.StokMiktar)
                     .FirstOrDefault();
 
+
+                var receteEkAlan2 = _db.Recetelers
+                    .Where(r => r.StokKod == item.StokKodu)
+                    .Select(r => r.EkAlan2)
+                    .FirstOrDefault();
+
                 if (receteMiktar <= 0)
                 {
                     Console.WriteLine($"❌ Reçete miktarı 0");
@@ -177,7 +183,8 @@ namespace erpv01.Controllers
                         OlusturmaTarihi = Tarih,
                         OlusturanKullanici = "ENTEGRASYON_01",
                         Tarih = Tarih,
-                        Durum = 1
+                        Durum = 1,
+                        EkAlan2 = receteEkAlan2
                     };
 
                     _db.IsEmirleris.Add(model1);

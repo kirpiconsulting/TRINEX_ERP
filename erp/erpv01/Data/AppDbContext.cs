@@ -54,6 +54,8 @@ public partial class AppDbContext : DbContext
 
     public virtual DbSet<Tezgahlar> Tezgahlars { get; set; }
 
+    public virtual DbSet<UretimFisiKalemleri> UretimFisiKalemleris { get; set; }
+
     public virtual DbSet<UretimFisiTuketimler> UretimFisiTuketimlers { get; set; }
 
     public virtual DbSet<UretimFisleri> UretimFisleris { get; set; }
@@ -64,7 +66,7 @@ public partial class AppDbContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server=DESKTOP-FRMT5TL\\SQLEX22;Database=DB_BARTEZ;User Id=sa;Password=123;TrustServerCertificate=True");
+        => optionsBuilder.UseSqlServer("Server=DESKTOP-0ID8PJD\\SQLEXPRESS;Database=DB_BARTEZ;User Id=sa;Password=123;TrustServerCertificate=True");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -1240,6 +1242,11 @@ public partial class AppDbContext : DbContext
             entity.Property(e => e.EvrakNo)
                 .HasMaxLength(100)
                 .HasColumnName("evrak_no");
+            entity.Property(e => e.FireDeposuKodu)
+                .HasMaxLength(100)
+                .IsUnicode(false)
+                .IsFixedLength()
+                .HasColumnName("fire_deposu_kodu");
             entity.Property(e => e.GuncellemeTarihi).HasColumnName("guncelleme_tarihi");
             entity.Property(e => e.GuncelleyenKullanici)
                 .HasMaxLength(100)
@@ -1286,6 +1293,21 @@ public partial class AppDbContext : DbContext
                 .HasColumnType("decimal(18, 4)")
                 .HasColumnName("stok_miktar");
             entity.Property(e => e.Tarih).HasColumnName("tarih");
+            entity.Property(e => e.TuketimDeposuKodu)
+                .HasMaxLength(100)
+                .IsUnicode(false)
+                .IsFixedLength()
+                .HasColumnName("tuketim_deposu_kodu");
+            entity.Property(e => e.UretimDeposuKodu)
+                .HasMaxLength(100)
+                .IsUnicode(false)
+                .IsFixedLength()
+                .HasColumnName("uretim_deposu_kodu");
+            entity.Property(e => e.YanUrunDeposuKodu)
+                .HasMaxLength(100)
+                .IsUnicode(false)
+                .IsFixedLength()
+                .HasColumnName("yan_urun_deposu_kodu");
             entity.Property(e => e.YarimamulKod)
                 .HasMaxLength(100)
                 .HasColumnName("yarimamul_kod");
@@ -1436,6 +1458,83 @@ public partial class AppDbContext : DbContext
             entity.Property(e => e.Tip).HasColumnName("tip");
         });
 
+        modelBuilder.Entity<UretimFisiKalemleri>(entity =>
+        {
+            entity.ToTable("uretim_fisi_kalemleri");
+
+            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.AktifMi)
+                .HasDefaultValue(true)
+                .HasColumnName("aktif_mi");
+            entity.Property(e => e.Birim)
+                .HasMaxLength(6)
+                .IsUnicode(false)
+                .IsFixedLength()
+                .HasColumnName("birim");
+            entity.Property(e => e.EkAlan1).HasColumnName("ek_alan_1");
+            entity.Property(e => e.EkAlan10).HasColumnName("ek_alan_10");
+            entity.Property(e => e.EkAlan2).HasColumnName("ek_alan_2");
+            entity.Property(e => e.EkAlan3).HasColumnName("ek_alan_3");
+            entity.Property(e => e.EkAlan4).HasColumnName("ek_alan_4");
+            entity.Property(e => e.EkAlan5).HasColumnName("ek_alan_5");
+            entity.Property(e => e.EkAlan6).HasColumnName("ek_alan_6");
+            entity.Property(e => e.EkAlan7).HasColumnName("ek_alan_7");
+            entity.Property(e => e.EkAlan8).HasColumnName("ek_alan_8");
+            entity.Property(e => e.EkAlan9).HasColumnName("ek_alan_9");
+            entity.Property(e => e.EvrakNo)
+                .HasMaxLength(100)
+                .HasColumnName("evrak_no");
+            entity.Property(e => e.FireDeposuKodu)
+                .HasMaxLength(100)
+                .IsUnicode(false)
+                .IsFixedLength()
+                .HasColumnName("fire_deposu_kodu");
+            entity.Property(e => e.GuncellemeTarihi).HasColumnName("guncelleme_tarihi");
+            entity.Property(e => e.GuncelleyenKullanici)
+                .HasMaxLength(100)
+                .HasColumnName("guncelleyen_kullanici");
+            entity.Property(e => e.KalemKodu)
+                .HasMaxLength(100)
+                .HasColumnName("kalem_kodu");
+            entity.Property(e => e.LotNo)
+                .HasMaxLength(100)
+                .HasColumnName("lot_no");
+            entity.Property(e => e.Miktar)
+                .HasColumnType("decimal(18, 4)")
+                .HasColumnName("miktar");
+            entity.Property(e => e.OlusturanKullanici)
+                .HasMaxLength(100)
+                .HasColumnName("olusturan_kullanici");
+            entity.Property(e => e.OlusturmaTarihi)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnName("olusturma_tarihi");
+            entity.Property(e => e.SeriNo)
+                .HasMaxLength(100)
+                .HasColumnName("seri_no");
+            entity.Property(e => e.SiraNumarasi).HasColumnName("sira_numarasi");
+            entity.Property(e => e.StokKod)
+                .HasMaxLength(100)
+                .HasColumnName("stok_kod");
+            entity.Property(e => e.TuketimDeposuKodu)
+                .HasMaxLength(100)
+                .IsUnicode(false)
+                .IsFixedLength()
+                .HasColumnName("tuketim_deposu_kodu");
+            entity.Property(e => e.UretimDeposuKodu)
+                .HasMaxLength(100)
+                .IsUnicode(false)
+                .IsFixedLength()
+                .HasColumnName("uretim_deposu_kodu");
+            entity.Property(e => e.UretimLotNo)
+                .HasMaxLength(50)
+                .HasColumnName("uretim_lot_no");
+            entity.Property(e => e.YanUrunDeposuKodu)
+                .HasMaxLength(100)
+                .IsUnicode(false)
+                .IsFixedLength()
+                .HasColumnName("yan_urun_deposu_kodu");
+        });
+
         modelBuilder.Entity<UretimFisiTuketimler>(entity =>
         {
             entity.ToTable("uretim_fisi_tuketimler");
@@ -1468,6 +1567,11 @@ public partial class AppDbContext : DbContext
                 .IsFixedLength()
                 .HasColumnName("fason_normal");
             entity.Property(e => e.FireDagitimdanMi).HasColumnName("fire_dagitimdan_mi");
+            entity.Property(e => e.FireDeposuKodu)
+                .HasMaxLength(100)
+                .IsUnicode(false)
+                .IsFixedLength()
+                .HasColumnName("fire_deposu_kodu");
             entity.Property(e => e.GuncellemeTarihi).HasColumnName("guncelleme_tarihi");
             entity.Property(e => e.GuncelleyenKullanici)
                 .HasMaxLength(100)
@@ -1532,6 +1636,21 @@ public partial class AppDbContext : DbContext
                 .HasMaxLength(100)
                 .HasColumnName("stok_kod");
             entity.Property(e => e.Tarih).HasColumnName("tarih");
+            entity.Property(e => e.TuketimDeposuKodu)
+                .HasMaxLength(100)
+                .IsUnicode(false)
+                .IsFixedLength()
+                .HasColumnName("tuketim_deposu_kodu");
+            entity.Property(e => e.UretimDeposuKodu)
+                .HasMaxLength(100)
+                .IsUnicode(false)
+                .IsFixedLength()
+                .HasColumnName("uretim_deposu_kodu");
+            entity.Property(e => e.YanUrunDeposuKodu)
+                .HasMaxLength(100)
+                .IsUnicode(false)
+                .IsFixedLength()
+                .HasColumnName("yan_urun_deposu_kodu");
         });
 
         modelBuilder.Entity<UretimFisleri>(entity =>

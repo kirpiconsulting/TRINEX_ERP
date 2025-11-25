@@ -1,1 +1,59 @@
-﻿
+﻿@{
+    ViewData["Title"] = "Chart.js Basit Örnek";
+    Layout = "_Layout";
+}
+
+<!-- Chart.js CDN -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<div class="container mt-5">
+
+    <h3 class="mb-4">Chart.js – Basit Örnek (Sample Data)</h3>
+
+    <div class="card shadow-sm p-4">
+        <canvas id="myChart" height="150"></canvas>
+    </div>
+
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            const ctx = document.getElementById('myChart');
+
+            // Sample Labels
+            const labels = ["Pazar", "P.tesi", "Salı", "Çarş.", "Perş.", "Cuma", "Ctesi"];
+
+            // Sample Values
+            const values = [12, 19, 8, 15, 22, 14, 9];
+
+            new Chart(ctx, {
+                type: 'line',   // 'bar', 'pie', 'doughnut', 'radar' yapabilirsin
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: "Günlük Üretim (adet)",
+                        data: values,
+                        borderWidth: 3,
+                        borderColor: 'rgba(54, 162, 235, 0.9)',
+                        backgroundColor: 'rgba(54, 162, 235, 0.25)',
+                        tension: 0.3,
+                        pointRadius: 4,
+                        pointBackgroundColor: 'rgba(54, 162, 235, 1)'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { display: true }
+                    },
+                    scales: {
+                        y: { beginAtZero: true }
+                    }
+                }
+            });
+
+        });
+    </script>
+}

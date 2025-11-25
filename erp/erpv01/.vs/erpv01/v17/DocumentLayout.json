@@ -1,54 +1,42 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\KIRPI\\Documents\\TRINEX_ERP\\erp\\erpv01\\",
+  "WorkspaceRootPath": "C:\\project_bartez\\erp\\erpv01\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{8AF384EF-28BE-4B02-878C-C79CCCF7C17C}|erpv01.csproj|c:\\users\\kirpi\\documents\\trinex_erp\\erp\\erpv01\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8AF384EF-28BE-4B02-878C-C79CCCF7C17C}|erpv01.csproj|solutionrelative:data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{8AF384EF-28BE-4B02-878C-C79CCCF7C17C}|erpv01.csproj|c:\\project_bartez\\erp\\erpv01\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8AF384EF-28BE-4B02-878C-C79CCCF7C17C}|erpv01.csproj|solutionrelative:views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8AF384EF-28BE-4B02-878C-C79CCCF7C17C}|erpv01.csproj|c:\\users\\kirpi\\documents\\trinex_erp\\erp\\erpv01\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{8AF384EF-28BE-4B02-878C-C79CCCF7C17C}|erpv01.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+      "AbsoluteMoniker": "D:0:0:{8AF384EF-28BE-4B02-878C-C79CCCF7C17C}|erpv01.csproj|c:\\project_bartez\\erp\\erpv01\\wwwroot\\js\\erp_bilesenleri.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{8AF384EF-28BE-4B02-878C-C79CCCF7C17C}|erpv01.csproj|solutionrelative:wwwroot\\js\\erp_bilesenleri.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8AF384EF-28BE-4B02-878C-C79CCCF7C17C}|erpv01.csproj|c:\\users\\kirpi\\documents\\trinex_erp\\erp\\erpv01\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8AF384EF-28BE-4B02-878C-C79CCCF7C17C}|erpv01.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{8AF384EF-28BE-4B02-878C-C79CCCF7C17C}|erpv01.csproj|c:\\project_bartez\\erp\\erpv01\\wwwroot\\css\\erp_bilesenleri.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{8AF384EF-28BE-4B02-878C-C79CCCF7C17C}|erpv01.csproj|solutionrelative:wwwroot\\css\\erp_bilesenleri.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8AF384EF-28BE-4B02-878C-C79CCCF7C17C}|erpv01.csproj|c:\\users\\kirpi\\documents\\trinex_erp\\erp\\erpv01\\controllers\\uretimcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8AF384EF-28BE-4B02-878C-C79CCCF7C17C}|erpv01.csproj|solutionrelative:controllers\\uretimcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{8AF384EF-28BE-4B02-878C-C79CCCF7C17C}|erpv01.csproj|c:\\project_bartez\\erp\\erpv01\\views\\satis\\liste2.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8AF384EF-28BE-4B02-878C-C79CCCF7C17C}|erpv01.csproj|solutionrelative:views\\satis\\liste2.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8AF384EF-28BE-4B02-878C-C79CCCF7C17C}|erpv01.csproj|c:\\users\\kirpi\\documents\\trinex_erp\\erp\\erpv01\\wwwroot\\lib\\jquery\\dist\\jquery.min.map||{3B902123-F8A7-4915-9F01-361F908088D0}",
-      "RelativeMoniker": "D:0:0:{8AF384EF-28BE-4B02-878C-C79CCCF7C17C}|erpv01.csproj|solutionrelative:wwwroot\\lib\\jquery\\dist\\jquery.min.map||{3B902123-F8A7-4915-9F01-361F908088D0}"
+      "AbsoluteMoniker": "D:0:0:{8AF384EF-28BE-4B02-878C-C79CCCF7C17C}|erpv01.csproj|c:\\project_bartez\\erp\\erpv01\\controllers\\satiscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8AF384EF-28BE-4B02-878C-C79CCCF7C17C}|erpv01.csproj|solutionrelative:controllers\\satiscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8AF384EF-28BE-4B02-878C-C79CCCF7C17C}|erpv01.csproj|c:\\users\\kirpi\\documents\\trinex_erp\\erp\\erpv01\\wwwroot\\lib\\jquery\\dist\\jquery.min.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{8AF384EF-28BE-4B02-878C-C79CCCF7C17C}|erpv01.csproj|solutionrelative:wwwroot\\lib\\jquery\\dist\\jquery.min.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+      "AbsoluteMoniker": "D:0:0:{8AF384EF-28BE-4B02-878C-C79CCCF7C17C}|erpv01.csproj|c:\\project_bartez\\erp\\erpv01\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8AF384EF-28BE-4B02-878C-C79CCCF7C17C}|erpv01.csproj|solutionrelative:controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8AF384EF-28BE-4B02-878C-C79CCCF7C17C}|erpv01.csproj|c:\\users\\kirpi\\documents\\trinex_erp\\erp\\erpv01\\wwwroot\\lib\\jquery\\dist\\jquery.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{8AF384EF-28BE-4B02-878C-C79CCCF7C17C}|erpv01.csproj|solutionrelative:wwwroot\\lib\\jquery\\dist\\jquery.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8AF384EF-28BE-4B02-878C-C79CCCF7C17C}|erpv01.csproj|c:\\users\\kirpi\\documents\\trinex_erp\\erp\\erpv01\\views\\account\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{8AF384EF-28BE-4B02-878C-C79CCCF7C17C}|erpv01.csproj|solutionrelative:views\\account\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8AF384EF-28BE-4B02-878C-C79CCCF7C17C}|erpv01.csproj|c:\\users\\kirpi\\documents\\trinex_erp\\erp\\erpv01\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8AF384EF-28BE-4B02-878C-C79CCCF7C17C}|erpv01.csproj|solutionrelative:controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8AF384EF-28BE-4B02-878C-C79CCCF7C17C}|erpv01.csproj|c:\\users\\kirpi\\documents\\trinex_erp\\erp\\erpv01\\views\\uretim\\uretimbildirimi1.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{8AF384EF-28BE-4B02-878C-C79CCCF7C17C}|erpv01.csproj|c:\\project_bartez\\erp\\erpv01\\views\\uretim\\uretimbildirimi1.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{8AF384EF-28BE-4B02-878C-C79CCCF7C17C}|erpv01.csproj|solutionrelative:views\\uretim\\uretimbildirimi1.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8AF384EF-28BE-4B02-878C-C79CCCF7C17C}|erpv01.csproj|c:\\users\\kirpi\\documents\\trinex_erp\\erp\\erpv01\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{8AF384EF-28BE-4B02-878C-C79CCCF7C17C}|erpv01.csproj|solutionrelative:views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{8AF384EF-28BE-4B02-878C-C79CCCF7C17C}|erpv01.csproj|c:\\project_bartez\\erp\\erpv01\\controllers\\uretimcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8AF384EF-28BE-4B02-878C-C79CCCF7C17C}|erpv01.csproj|solutionrelative:controllers\\uretimcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8AF384EF-28BE-4B02-878C-C79CCCF7C17C}|erpv01.csproj|c:\\users\\kirpi\\documents\\trinex_erp\\erp\\erpv01\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{8AF384EF-28BE-4B02-878C-C79CCCF7C17C}|erpv01.csproj|solutionrelative:views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{8AF384EF-28BE-4B02-878C-C79CCCF7C17C}|erpv01.csproj|c:\\project_bartez\\erp\\erpv01\\wwwroot\\ornek.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{8AF384EF-28BE-4B02-878C-C79CCCF7C17C}|erpv01.csproj|solutionrelative:wwwroot\\ornek.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
     }
   ],
   "DocumentGroupContainers": [
@@ -58,7 +46,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Bookmark",
@@ -66,150 +54,120 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "AppDbContext.cs",
-              "DocumentMoniker": "C:\\Users\\KIRPI\\Documents\\TRINEX_ERP\\erp\\erpv01\\Data\\AppDbContext.cs",
-              "RelativeDocumentMoniker": "Data\\AppDbContext.cs",
-              "ToolTip": "C:\\Users\\KIRPI\\Documents\\TRINEX_ERP\\erp\\erpv01\\Data\\AppDbContext.cs",
-              "RelativeToolTip": "Data\\AppDbContext.cs",
-              "ViewState": "AgIAAD0AAAAAAAAAAAAuwFYAAAAmAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-25T07:30:34.113Z",
+              "DocumentIndex": 2,
+              "Title": "erp_bilesenleri.css",
+              "DocumentMoniker": "C:\\project_bartez\\erp\\erpv01\\wwwroot\\css\\erp_bilesenleri.css",
+              "RelativeDocumentMoniker": "wwwroot\\css\\erp_bilesenleri.css",
+              "ToolTip": "C:\\project_bartez\\erp\\erpv01\\wwwroot\\css\\erp_bilesenleri.css",
+              "RelativeToolTip": "wwwroot\\css\\erp_bilesenleri.css",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-11-24T18:51:49.852Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\KIRPI\\Documents\\TRINEX_ERP\\erp\\erpv01\\Program.cs",
-              "RelativeDocumentMoniker": "Program.cs",
-              "ToolTip": "C:\\Users\\KIRPI\\Documents\\TRINEX_ERP\\erp\\erpv01\\Program.cs",
-              "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAANAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-25T07:20:59.833Z",
+              "DocumentIndex": 3,
+              "Title": "Liste2.cshtml",
+              "DocumentMoniker": "C:\\project_bartez\\erp\\erpv01\\Views\\Satis\\Liste2.cshtml",
+              "RelativeDocumentMoniker": "Views\\Satis\\Liste2.cshtml",
+              "ToolTip": "C:\\project_bartez\\erp\\erpv01\\Views\\Satis\\Liste2.cshtml",
+              "RelativeToolTip": "Views\\Satis\\Liste2.cshtml",
+              "ViewState": "AgIAAGYAAAAAAAAAAAAAAHgAAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-24T18:51:11.951Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "C:\\Users\\KIRPI\\Documents\\TRINEX_ERP\\erp\\erpv01\\appsettings.json",
-              "RelativeDocumentMoniker": "appsettings.json",
-              "ToolTip": "C:\\Users\\KIRPI\\Documents\\TRINEX_ERP\\erp\\erpv01\\appsettings.json",
-              "RelativeToolTip": "appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-11-24T11:27:55.72Z",
+              "Title": "erp_bilesenleri.js",
+              "DocumentMoniker": "C:\\project_bartez\\erp\\erpv01\\wwwroot\\js\\erp_bilesenleri.js",
+              "RelativeDocumentMoniker": "wwwroot\\js\\erp_bilesenleri.js",
+              "ToolTip": "C:\\project_bartez\\erp\\erpv01\\wwwroot\\js\\erp_bilesenleri.js",
+              "RelativeToolTip": "wwwroot\\js\\erp_bilesenleri.js",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAQwA0AAACKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-11-24T18:50:17.43Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\project_bartez\\erp\\erpv01\\Views\\Home\\Index.cshtml",
+              "RelativeDocumentMoniker": "Views\\Home\\Index.cshtml",
+              "ToolTip": "C:\\project_bartez\\erp\\erpv01\\Views\\Home\\Index.cshtml",
+              "RelativeToolTip": "Views\\Home\\Index.cshtml",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAACUAAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-24T18:27:16.618Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "C:\\project_bartez\\erp\\erpv01\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "Controllers\\HomeController.cs",
+              "ToolTip": "C:\\project_bartez\\erp\\erpv01\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "Controllers\\HomeController.cs",
+              "ViewState": "AgIAADMAAAAAAAAAAAAgwEIAAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-24T18:27:11.203Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "ornek.txt",
+              "DocumentMoniker": "C:\\project_bartez\\erp\\erpv01\\wwwroot\\ornek.txt",
+              "RelativeDocumentMoniker": "wwwroot\\ornek.txt",
+              "ToolTip": "C:\\project_bartez\\erp\\erpv01\\wwwroot\\ornek.txt",
+              "RelativeToolTip": "wwwroot\\ornek.txt",
+              "ViewState": "AgIAAO4CAAAAAAAAAAAAAPQCAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
+              "WhenOpened": "2025-11-24T13:39:06.868Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "jquery.min.map",
-              "DocumentMoniker": "C:\\Users\\KIRPI\\Documents\\TRINEX_ERP\\erp\\erpv01\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
-              "RelativeDocumentMoniker": "wwwroot\\lib\\jquery\\dist\\jquery.min.map",
-              "ToolTip": "C:\\Users\\KIRPI\\Documents\\TRINEX_ERP\\erp\\erpv01\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
-              "RelativeToolTip": "wwwroot\\lib\\jquery\\dist\\jquery.min.map",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAA9NAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2025-11-24T11:23:50.055Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "jquery.min.js",
-              "DocumentMoniker": "C:\\Users\\KIRPI\\Documents\\TRINEX_ERP\\erp\\erpv01\\wwwroot\\lib\\jquery\\dist\\jquery.min.js",
-              "RelativeDocumentMoniker": "wwwroot\\lib\\jquery\\dist\\jquery.min.js",
-              "ToolTip": "C:\\Users\\KIRPI\\Documents\\TRINEX_ERP\\erp\\erpv01\\wwwroot\\lib\\jquery\\dist\\jquery.min.js",
-              "RelativeToolTip": "wwwroot\\lib\\jquery\\dist\\jquery.min.js",
-              "ViewState": "AgIAAAEAAAAAAAAAAAAAAAEAAADvPwEAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-11-24T11:23:46.246Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "jquery.js",
-              "DocumentMoniker": "C:\\Users\\KIRPI\\Documents\\TRINEX_ERP\\erp\\erpv01\\wwwroot\\lib\\jquery\\dist\\jquery.js",
-              "RelativeDocumentMoniker": "wwwroot\\lib\\jquery\\dist\\jquery.js",
-              "ToolTip": "C:\\Users\\KIRPI\\Documents\\TRINEX_ERP\\erp\\erpv01\\wwwroot\\lib\\jquery\\dist\\jquery.js",
-              "RelativeToolTip": "wwwroot\\lib\\jquery\\dist\\jquery.js",
-              "ViewState": "AgIAAP8mAAAAAAAAAAAmwBAnAAAVAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-11-24T11:23:41.628Z"
+              "Title": "SatisController.cs",
+              "DocumentMoniker": "C:\\project_bartez\\erp\\erpv01\\Controllers\\SatisController.cs",
+              "RelativeDocumentMoniker": "Controllers\\SatisController.cs",
+              "ToolTip": "C:\\project_bartez\\erp\\erpv01\\Controllers\\SatisController.cs",
+              "RelativeToolTip": "Controllers\\SatisController.cs",
+              "ViewState": "AgIAACoAAAAAAAAAAAAgwEIAAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-24T13:06:01.75Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 7,
-              "Title": "Login.cshtml",
-              "DocumentMoniker": "C:\\Users\\KIRPI\\Documents\\TRINEX_ERP\\erp\\erpv01\\Views\\Account\\Login.cshtml",
-              "RelativeDocumentMoniker": "Views\\Account\\Login.cshtml",
-              "ToolTip": "C:\\Users\\KIRPI\\Documents\\TRINEX_ERP\\erp\\erpv01\\Views\\Account\\Login.cshtml",
-              "RelativeToolTip": "Views\\Account\\Login.cshtml",
-              "ViewState": "AgIAAEEBAAAAAAAAAAAAAE4BAABXAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-11-24T11:23:08.626Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "AccountController.cs",
-              "DocumentMoniker": "C:\\Users\\KIRPI\\Documents\\TRINEX_ERP\\erp\\erpv01\\Controllers\\AccountController.cs",
-              "RelativeDocumentMoniker": "Controllers\\AccountController.cs",
-              "ToolTip": "C:\\Users\\KIRPI\\Documents\\TRINEX_ERP\\erp\\erpv01\\Controllers\\AccountController.cs",
-              "RelativeToolTip": "Controllers\\AccountController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAhAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-24T11:22:49.902Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\KIRPI\\Documents\\TRINEX_ERP\\erp\\erpv01\\Views\\Home\\Index.cshtml",
-              "RelativeDocumentMoniker": "Views\\Home\\Index.cshtml",
-              "ToolTip": "C:\\Users\\KIRPI\\Documents\\TRINEX_ERP\\erp\\erpv01\\Views\\Home\\Index.cshtml",
-              "RelativeToolTip": "Views\\Home\\Index.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-11-24T11:21:19.558Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "_Layout.cshtml",
-              "DocumentMoniker": "C:\\Users\\KIRPI\\Documents\\TRINEX_ERP\\erp\\erpv01\\Views\\Shared\\_Layout.cshtml",
-              "RelativeDocumentMoniker": "Views\\Shared\\_Layout.cshtml",
-              "ToolTip": "C:\\Users\\KIRPI\\Documents\\TRINEX_ERP\\erp\\erpv01\\Views\\Shared\\_Layout.cshtml",
-              "RelativeToolTip": "Views\\Shared\\_Layout.cshtml",
-              "ViewState": "AgIAACQAAAAAAAAAAAAAADABAAAlAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-11-24T07:41:54.446Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
               "Title": "UretimController.cs",
-              "DocumentMoniker": "C:\\Users\\KIRPI\\Documents\\TRINEX_ERP\\erp\\erpv01\\Controllers\\UretimController.cs",
+              "DocumentMoniker": "C:\\project_bartez\\erp\\erpv01\\Controllers\\UretimController.cs",
               "RelativeDocumentMoniker": "Controllers\\UretimController.cs",
-              "ToolTip": "C:\\Users\\KIRPI\\Documents\\TRINEX_ERP\\erp\\erpv01\\Controllers\\UretimController.cs",
+              "ToolTip": "C:\\project_bartez\\erp\\erpv01\\Controllers\\UretimController.cs",
               "RelativeToolTip": "Controllers\\UretimController.cs",
-              "ViewState": "AgIAACMAAAAAAAAAAAAiwCgAAAAkAAAAAAAAAA==",
+              "ViewState": "AgIAAEACAAAAAAAAAAApwFACAABEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-23T18:33:36.713Z"
+              "WhenOpened": "2025-11-23T18:33:36.713Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 6,
               "Title": "UretimBildirimi1.cshtml",
-              "DocumentMoniker": "C:\\Users\\KIRPI\\Documents\\TRINEX_ERP\\erp\\erpv01\\Views\\Uretim\\UretimBildirimi1.cshtml",
+              "DocumentMoniker": "C:\\project_bartez\\erp\\erpv01\\Views\\Uretim\\UretimBildirimi1.cshtml",
               "RelativeDocumentMoniker": "Views\\Uretim\\UretimBildirimi1.cshtml",
-              "ToolTip": "C:\\Users\\KIRPI\\Documents\\TRINEX_ERP\\erp\\erpv01\\Views\\Uretim\\UretimBildirimi1.cshtml",
+              "ToolTip": "C:\\project_bartez\\erp\\erpv01\\Views\\Uretim\\UretimBildirimi1.cshtml",
               "RelativeToolTip": "Views\\Uretim\\UretimBildirimi1.cshtml",
-              "ViewState": "AgIAAEQAAAAAAAAAAAAgwHUAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAOMBAAAAAAAAAAAYwA4CAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-11-24T07:40:43.174Z"
+              "WhenOpened": "2025-11-24T07:40:43.174Z",
+              "EditorCaption": ""
             }
           ]
         }
