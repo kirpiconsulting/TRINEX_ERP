@@ -1,0 +1,23 @@
+{
+  "kullanici": "mobil",
+  "parola": "1919",
+  "firma": "11",
+  "donem": "1",
+  "apikey": "77838968-b9b3-4ba7-8edd-ff3b52b05234",
+  "connectionstring": "Server=89.252.181.138\\MSSQLSERVER2022;Database=hednovae_DB_TRINEX;Uid=hednovae_trinex;Pwd=F~8Fvwq1Pwntoo%4;TrustServerCertificate=yes;",
+  "periyot_dakika_oturum_kimligi": "30",
+  "periyot_dakika_depolar": "30",
+  "periyot_dakika_cariler": "30",
+  "periyot_dakika_operasyonlar": "30",
+  "periyot_dakika_operatorler": "30",
+  "periyot_dakika_tezgahlar": "30",
+  "periyot_dakika_stoklar": "30",
+  "periyot_dakika_satis_siparisleri": "30",
+  "periyot_dakika_satis_siparis_kalemleri": "30",
+  "periyot_dakika_satinalma_siparisleri": "30",
+  "periyot_dakika_satinalma_siparis_kalemleri": "30",
+  "periyot_dakika_receteler": "30",
+  "periyot_dakika_recete_kalemleri": "30",
+  "periyot_dakika_sistem_stok_birimleri": "30",
+  "periyot_dakika_lot_seri_tanimlari": "30"
+}

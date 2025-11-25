@@ -1,0 +1,10 @@
+{
+  "version": "3.0",
+  "defaultProvider": "cdnjs",
+  "libraries": [
+    {
+      "library": "6pac-slickgrid@5.15.5",
+      "destination": "wwwroot/lib/6pac-slickgrid/"
+    }
+  ]
+}
