@@ -1,0 +1,122 @@
+﻿@model erpv01.Models.Grid.GridViewModel
+
+@{
+    ViewData["Title"] = Model.Baslik ?? "Üretim Fişleri";
+    Layout = "_Layout";
+}
+
+<div class="container-fluid mt-3 mb-3">
+
+    <!-- TOOLBAR -->
+    <div class="row mb-2">
+        <div class="col-12">
+            <div id="listeToolbar"></div>
+        </div>
+    </div>
+
+    <!-- GRID -->
+    <div class="card shadow-sm border-0 mb-3">
+        <div class="card-body p-0">
+            <div id="uretimFisGrid" class="tui-grid-box"></div>
+        </div>
+    </div>
+
+    <!-- DEBUG: JSON Gösterimi -->
+    @* <div class="card border-0">
+        <div class="card-body">
+            <h6>DEBUG - DATA JSON</h6>
+            <pre style="max-height:200px;overflow:auto;font-size:11px;">
+@Model.DataJson
+            </pre>
+
+            <h6>DEBUG - COLUMNS JSON</h6>
+            <pre style="max-height:200px;overflow:auto;font-size:11px;">
+@Model.ColumnsJson
+            </pre> 
+        </div>
+    </div> *@
+
+</div>
+
+
+@section Scripts {
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            // ---------------------------------------------
+            // 1) TOOLBAR
+            // ---------------------------------------------
+            liste_ekrani_butonlari_olustur("listeToolbar", {
+                fonksiyonlar: [
+                     
+                ],
+                ciktilar: [
+                    { ad: "Excel Çıktısı", action: "uretim_fisleri_excel" }
+                ]
+            });
+
+
+            // ---------------------------------------------
+            // 2) DATA & COLUMNS — JSON.parse YOK!
+            //    Controller zaten JSON string gönderiyor (valid JSON)
+            // ---------------------------------------------
+            var tabloVerileri  = @Html.Raw(Model.DataJson);     // object[]
+            var tabloSutunlari = @Html.Raw(Model.ColumnsJson);  // object[]
+
+            console.log("DATA →", tabloVerileri);
+            console.log("COLUMNS →", tabloSutunlari);
+
+
+            // ---------------------------------------------
+            // 3) GRID OLUŞTUR
+            // ---------------------------------------------
+            window.uretimFisGrid = liste_gridi_olustur(
+                "uretimFisGrid",
+                tabloVerileri,
+                tabloSutunlari,
+                {
+                    filtreleme: true,
+                    siralama: true,
+                    excel: true,
+                    temizle: true,
+                    sutunSecimi: true,
+                    secim: true,
+                    satirNo: true,
+                    sabitKolonSayisi: 0,
+                    bodyHeight: 'fitToParent'
+                }
+            );
+                                
+
+        });
+    </script>
+
+   
+
+
+    <!-- Bu sayfada form butonları gereksizse gizliyoruz -->
+    <script>
+        $(document).ready(function() {
+            $(".btn-erp-yeni").remove();
+            $(".btn-erp-kaydet").remove();
+            $(".btn-erp-guncelle").remove();           
+        });
+    </script>
+
+}
+
+<style>
+    #uretimFisGrid {
+        width: 100% !important;
+        height: calc(100vh - 180px) !important;
+    }
+
+    .tui-grid-container {
+        width: 100% !important;
+    }
+
+    .grid-tools-wrapper {
+        margin-bottom: 4px;
+    }
+</style>

@@ -1,0 +1,122 @@
+﻿@model erpv01.Models.Grid.GridViewModel
+
+@{
+    ViewData["Title"] = Model.Baslik;
+    Layout = "_Layout";
+}
+
+<div class="container-fluid mt-3 mb-3">
+
+    <!-- TOOLBAR -->
+    <div class="row mb-2">
+        <div class="col-12">
+            <div id="listeToolbar"></div>
+        </div>
+    </div>
+
+    <!-- GRID -->
+    <div class="card shadow-sm border-0">
+        <div class="card-body p-0">
+            <div id="sureGrid" style="height: calc(100vh - 180px); width: 100%;"></div>
+        </div>
+    </div>
+
+</div>
+
+
+@section Scripts {
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            // TOOLBAR
+            liste_ekrani_butonlari_olustur("listeToolbar", {
+                fonksiyonlar: [
+                    { ad: "Seçili Kayıtları Sil", action: "sure_sil" }
+                ],
+                ciktilar: [
+                    { ad: "Excel", action: "sure_excel" }
+                ]
+            });
+
+            // VERİLER
+            var tabloVerileri = @Html.Raw(Model.DataJson);
+            var tabloSutunlari = @Html.Raw(Model.ColumnsJson);
+
+            // GRID
+            window.sureGrid = liste_gridi_olustur(
+                "sureGrid",
+                tabloVerileri,
+                tabloSutunlari,
+                {
+                    filtreleme: true,
+                    siralama: true,
+                    excel: true,
+                    temizle: true,
+                    sutunSecimi: true,
+                    secim: true,
+                    satirNo: true,
+                    sabitKolonSayisi: 0
+                }
+            );
+
+            // Layout fix
+            setTimeout(() => {
+                window.sureGrid.refreshLayout();
+            }, 150);
+        });
+    </script>
+
+    <script>
+        // =====================================================
+        // GLOBAL SİLME FONKSİYONU
+        // =====================================================
+        function sure_sil() {
+
+            const selected = window.sureGrid.getCheckedRows();
+
+            if (!selected || selected.length === 0) {
+                showToast("Lütfen silmek için kayıt seçin.", "warning");
+                return;
+            }
+
+            const evrakNolari = selected.map(r => r.evrakNo);
+
+            if (!confirm("Aşağıdaki kayıtlar silinecek:\n\n" + evrakNolari.join(", "))) {
+                return;
+            }
+
+            fetch("/SureKayitlari/Sil", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ evrakNolari })
+            })
+            .then(r => r.json())
+            .then(res => {
+                if (res.success) {
+
+                    showToast(res.message, "success");
+
+                    // Grid güncelle
+                    const mevcut = window.sureGrid.getData();
+                    const kalan = mevcut.filter(x => !evrakNolari.includes(x.evrakNo));
+                    window.sureGrid.resetData(kalan);
+
+                } else {
+                    showToast(res.message, "error");
+                }
+            })
+            .catch(err => showToast("Sunucu hatası!", "error"));
+        }
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            $(".btn-erp-yeni").remove();
+            $(".btn-erp-kaydet").remove();
+            $(".btn-erp-guncelle").remove();
+            
+        });
+    </script>
+
+}

@@ -1,0 +1,410 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\KIRPI\\Downloads\\erp (1)\\erp\\erpv01\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{8AF384EF-28BE-4B02-878C-C79CCCF7C17C}|erpv01.csproj|c:\\users\\kirpi\\downloads\\erp (1)\\erp\\erpv01\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8AF384EF-28BE-4B02-878C-C79CCCF7C17C}|erpv01.csproj|solutionrelative:data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8AF384EF-28BE-4B02-878C-C79CCCF7C17C}|erpv01.csproj|c:\\users\\kirpi\\downloads\\erp (1)\\erp\\erpv01\\models\\entities\\uretimfisikalemleri.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8AF384EF-28BE-4B02-878C-C79CCCF7C17C}|erpv01.csproj|solutionrelative:models\\entities\\uretimfisikalemleri.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8AF384EF-28BE-4B02-878C-C79CCCF7C17C}|erpv01.csproj|c:\\users\\kirpi\\downloads\\erp (1)\\erp\\erpv01\\models\\entities\\isemrikalemleri.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8AF384EF-28BE-4B02-878C-C79CCCF7C17C}|erpv01.csproj|solutionrelative:models\\entities\\isemrikalemleri.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8AF384EF-28BE-4B02-878C-C79CCCF7C17C}|erpv01.csproj|c:\\users\\kirpi\\downloads\\erp (1)\\erp\\erpv01\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{8AF384EF-28BE-4B02-878C-C79CCCF7C17C}|erpv01.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8AF384EF-28BE-4B02-878C-C79CCCF7C17C}|erpv01.csproj|c:\\users\\kirpi\\downloads\\erp (1)\\erp\\erpv01\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{8AF384EF-28BE-4B02-878C-C79CCCF7C17C}|erpv01.csproj|solutionrelative:appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8AF384EF-28BE-4B02-878C-C79CCCF7C17C}|erpv01.csproj|c:\\users\\kirpi\\downloads\\erp (1)\\erp\\erpv01\\views\\uretimfisi\\liste1.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8AF384EF-28BE-4B02-878C-C79CCCF7C17C}|erpv01.csproj|solutionrelative:views\\uretimfisi\\liste1.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8AF384EF-28BE-4B02-878C-C79CCCF7C17C}|erpv01.csproj|c:\\users\\kirpi\\downloads\\erp (1)\\erp\\erpv01\\controllers\\uretimcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8AF384EF-28BE-4B02-878C-C79CCCF7C17C}|erpv01.csproj|solutionrelative:controllers\\uretimcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8AF384EF-28BE-4B02-878C-C79CCCF7C17C}|erpv01.csproj|c:\\users\\kirpi\\downloads\\erp (1)\\erp\\erpv01\\controllers\\uretimfisi.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8AF384EF-28BE-4B02-878C-C79CCCF7C17C}|erpv01.csproj|solutionrelative:controllers\\uretimfisi.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8AF384EF-28BE-4B02-878C-C79CCCF7C17C}|erpv01.csproj|c:\\users\\kirpi\\downloads\\erp (1)\\erp\\erpv01\\wwwroot\\js\\erp_bilesenleri.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{8AF384EF-28BE-4B02-878C-C79CCCF7C17C}|erpv01.csproj|solutionrelative:wwwroot\\js\\erp_bilesenleri.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8AF384EF-28BE-4B02-878C-C79CCCF7C17C}|erpv01.csproj|c:\\users\\kirpi\\downloads\\erp (1)\\erp\\erpv01\\views\\surekayitlari\\liste1.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8AF384EF-28BE-4B02-878C-C79CCCF7C17C}|erpv01.csproj|solutionrelative:views\\surekayitlari\\liste1.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8AF384EF-28BE-4B02-878C-C79CCCF7C17C}|erpv01.csproj|c:\\users\\kirpi\\downloads\\erp (1)\\erp\\erpv01\\controllers\\surekayitlari.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8AF384EF-28BE-4B02-878C-C79CCCF7C17C}|erpv01.csproj|solutionrelative:controllers\\surekayitlari.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8AF384EF-28BE-4B02-878C-C79CCCF7C17C}|erpv01.csproj|c:\\users\\kirpi\\downloads\\erp (1)\\erp\\erpv01\\views\\uretim\\liste1.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8AF384EF-28BE-4B02-878C-C79CCCF7C17C}|erpv01.csproj|solutionrelative:views\\uretim\\liste1.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8AF384EF-28BE-4B02-878C-C79CCCF7C17C}|erpv01.csproj|c:\\users\\kirpi\\downloads\\erp (1)\\erp\\erpv01\\wwwroot\\js\\site.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{8AF384EF-28BE-4B02-878C-C79CCCF7C17C}|erpv01.csproj|solutionrelative:wwwroot\\js\\site.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8AF384EF-28BE-4B02-878C-C79CCCF7C17C}|erpv01.csproj|c:\\users\\kirpi\\downloads\\erp (1)\\erp\\erpv01\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8AF384EF-28BE-4B02-878C-C79CCCF7C17C}|erpv01.csproj|solutionrelative:views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8AF384EF-28BE-4B02-878C-C79CCCF7C17C}|erpv01.csproj|c:\\users\\kirpi\\downloads\\erp (1)\\erp\\erpv01\\models\\uretimfisilistesi.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8AF384EF-28BE-4B02-878C-C79CCCF7C17C}|erpv01.csproj|solutionrelative:models\\uretimfisilistesi.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8AF384EF-28BE-4B02-878C-C79CCCF7C17C}|erpv01.csproj|c:\\users\\kirpi\\downloads\\erp (1)\\erp\\erpv01\\models\\gridmodels.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8AF384EF-28BE-4B02-878C-C79CCCF7C17C}|erpv01.csproj|solutionrelative:models\\gridmodels.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8AF384EF-28BE-4B02-878C-C79CCCF7C17C}|erpv01.csproj|c:\\users\\kirpi\\downloads\\erp (1)\\erp\\erpv01\\controllers\\satiscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8AF384EF-28BE-4B02-878C-C79CCCF7C17C}|erpv01.csproj|solutionrelative:controllers\\satiscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8AF384EF-28BE-4B02-878C-C79CCCF7C17C}|erpv01.csproj|c:\\users\\kirpi\\downloads\\erp (1)\\erp\\erpv01\\controllers\\stokcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8AF384EF-28BE-4B02-878C-C79CCCF7C17C}|erpv01.csproj|solutionrelative:controllers\\stokcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8AF384EF-28BE-4B02-878C-C79CCCF7C17C}|erpv01.csproj|c:\\users\\kirpi\\downloads\\erp (1)\\erp\\erpv01\\models\\entities\\uretimfisleri.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8AF384EF-28BE-4B02-878C-C79CCCF7C17C}|erpv01.csproj|solutionrelative:models\\entities\\uretimfisleri.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8AF384EF-28BE-4B02-878C-C79CCCF7C17C}|erpv01.csproj|c:\\users\\kirpi\\downloads\\erp (1)\\erp\\erpv01\\views\\account\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8AF384EF-28BE-4B02-878C-C79CCCF7C17C}|erpv01.csproj|solutionrelative:views\\account\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8AF384EF-28BE-4B02-878C-C79CCCF7C17C}|erpv01.csproj|c:\\users\\kirpi\\downloads\\erp (1)\\erp\\erpv01\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8AF384EF-28BE-4B02-878C-C79CCCF7C17C}|erpv01.csproj|solutionrelative:controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8AF384EF-28BE-4B02-878C-C79CCCF7C17C}|erpv01.csproj|c:\\users\\kirpi\\downloads\\erp (1)\\erp\\erpv01\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8AF384EF-28BE-4B02-878C-C79CCCF7C17C}|erpv01.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8AF384EF-28BE-4B02-878C-C79CCCF7C17C}|erpv01.csproj|c:\\users\\kirpi\\downloads\\erp (1)\\erp\\erpv01\\views\\satis\\liste2.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8AF384EF-28BE-4B02-878C-C79CCCF7C17C}|erpv01.csproj|solutionrelative:views\\satis\\liste2.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 8,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "IsEmriKalemleri.cs",
+              "DocumentMoniker": "C:\\Users\\KIRPI\\Downloads\\erp (1)\\erp\\erpv01\\Models\\Entities\\IsEmriKalemleri.cs",
+              "RelativeDocumentMoniker": "Models\\Entities\\IsEmriKalemleri.cs",
+              "ToolTip": "C:\\Users\\KIRPI\\Downloads\\erp (1)\\erp\\erpv01\\Models\\Entities\\IsEmriKalemleri.cs",
+              "RelativeToolTip": "Models\\Entities\\IsEmriKalemleri.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-03T10:11:36.847Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "site.js",
+              "DocumentMoniker": "C:\\Users\\KIRPI\\Downloads\\erp (1)\\erp\\erpv01\\wwwroot\\js\\site.js",
+              "RelativeDocumentMoniker": "wwwroot\\js\\site.js",
+              "ToolTip": "C:\\Users\\KIRPI\\Downloads\\erp (1)\\erp\\erpv01\\wwwroot\\js\\site.js",
+              "RelativeToolTip": "wwwroot\\js\\site.js",
+              "ViewState": "AgIAADIAAAAAAAAAAAAIwEsAAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-12-02T23:49:17.162Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Liste1.cshtml",
+              "DocumentMoniker": "C:\\Users\\KIRPI\\Downloads\\erp (1)\\erp\\erpv01\\Views\\UretimFisi\\Liste1.cshtml",
+              "RelativeDocumentMoniker": "Views\\UretimFisi\\Liste1.cshtml",
+              "ToolTip": "C:\\Users\\KIRPI\\Downloads\\erp (1)\\erp\\erpv01\\Views\\UretimFisi\\Liste1.cshtml",
+              "RelativeToolTip": "Views\\UretimFisi\\Liste1.cshtml",
+              "ViewState": "AgIAAEwAAAAAAAAAAAAAAGMAAAAmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-12-02T23:05:37.252Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "erp_bilesenleri.js",
+              "DocumentMoniker": "C:\\Users\\KIRPI\\Downloads\\erp (1)\\erp\\erpv01\\wwwroot\\js\\erp_bilesenleri.js",
+              "RelativeDocumentMoniker": "wwwroot\\js\\erp_bilesenleri.js",
+              "ToolTip": "C:\\Users\\KIRPI\\Downloads\\erp (1)\\erp\\erpv01\\wwwroot\\js\\erp_bilesenleri.js",
+              "RelativeToolTip": "wwwroot\\js\\erp_bilesenleri.js",
+              "ViewState": "AgIAAF4AAAAAAAAAAAAkwGwAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-12-02T23:03:46.235Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "UretimFisi.cs",
+              "DocumentMoniker": "C:\\Users\\KIRPI\\Downloads\\erp (1)\\erp\\erpv01\\Controllers\\UretimFisi.cs",
+              "RelativeDocumentMoniker": "Controllers\\UretimFisi.cs",
+              "ToolTip": "C:\\Users\\KIRPI\\Downloads\\erp (1)\\erp\\erpv01\\Controllers\\UretimFisi.cs",
+              "RelativeToolTip": "Controllers\\UretimFisi.cs",
+              "ViewState": "AgIAADcAAAAAAAAAAAAAAEkAAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-02T23:05:21.873Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "UretimController.cs",
+              "DocumentMoniker": "C:\\Users\\KIRPI\\Downloads\\erp (1)\\erp\\erpv01\\Controllers\\UretimController.cs",
+              "RelativeDocumentMoniker": "Controllers\\UretimController.cs",
+              "ToolTip": "C:\\Users\\KIRPI\\Downloads\\erp (1)\\erp\\erpv01\\Controllers\\UretimController.cs",
+              "RelativeToolTip": "Controllers\\UretimController.cs",
+              "ViewState": "AgIAAGMAAAAAAAAAAAAtwGsAAAA8AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-02T11:06:04.045Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\KIRPI\\Downloads\\erp (1)\\erp\\erpv01\\appsettings.json",
+              "RelativeDocumentMoniker": "appsettings.json",
+              "ToolTip": "C:\\Users\\KIRPI\\Downloads\\erp (1)\\erp\\erpv01\\appsettings.json",
+              "RelativeToolTip": "appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAA+AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-12-02T22:26:27.577Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "AppDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\KIRPI\\Downloads\\erp (1)\\erp\\erpv01\\Data\\AppDbContext.cs",
+              "RelativeDocumentMoniker": "Data\\AppDbContext.cs",
+              "ToolTip": "C:\\Users\\KIRPI\\Downloads\\erp (1)\\erp\\erpv01\\Data\\AppDbContext.cs",
+              "RelativeToolTip": "Data\\AppDbContext.cs",
+              "ViewState": "AgIAAEQAAAAAAAAAAAAqwEYAAABMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-02T22:26:58.426Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "UretimFisiKalemleri.cs",
+              "DocumentMoniker": "C:\\Users\\KIRPI\\Downloads\\erp (1)\\erp\\erpv01\\Models\\Entities\\UretimFisiKalemleri.cs",
+              "RelativeDocumentMoniker": "Models\\Entities\\UretimFisiKalemleri.cs",
+              "ToolTip": "C:\\Users\\KIRPI\\Downloads\\erp (1)\\erp\\erpv01\\Models\\Entities\\UretimFisiKalemleri.cs",
+              "RelativeToolTip": "Models\\Entities\\UretimFisiKalemleri.cs",
+              "ViewState": "AgIAABEAAAAAAAAAAAA9wBsAAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-02T22:53:22.887Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "UretimFisleri.cs",
+              "DocumentMoniker": "C:\\Users\\KIRPI\\Downloads\\erp (1)\\erp\\erpv01\\Models\\Entities\\UretimFisleri.cs",
+              "RelativeDocumentMoniker": "Models\\Entities\\UretimFisleri.cs",
+              "ToolTip": "C:\\Users\\KIRPI\\Downloads\\erp (1)\\erp\\erpv01\\Models\\Entities\\UretimFisleri.cs",
+              "RelativeToolTip": "Models\\Entities\\UretimFisleri.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-02T22:53:43.89Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "appsettings.Development.json",
+              "DocumentMoniker": "C:\\Users\\KIRPI\\Downloads\\erp (1)\\erp\\erpv01\\appsettings.Development.json",
+              "RelativeDocumentMoniker": "appsettings.Development.json",
+              "ToolTip": "C:\\Users\\KIRPI\\Downloads\\erp (1)\\erp\\erpv01\\appsettings.Development.json",
+              "RelativeToolTip": "appsettings.Development.json",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-12-03T10:05:06.344Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Liste1.cshtml",
+              "DocumentMoniker": "C:\\Users\\KIRPI\\Downloads\\erp (1)\\erp\\erpv01\\Views\\SureKayitlari\\Liste1.cshtml",
+              "RelativeDocumentMoniker": "Views\\SureKayitlari\\Liste1.cshtml",
+              "ToolTip": "C:\\Users\\KIRPI\\Downloads\\erp (1)\\erp\\erpv01\\Views\\SureKayitlari\\Liste1.cshtml",
+              "RelativeToolTip": "Views\\SureKayitlari\\Liste1.cshtml",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAACcAAAAPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-12-03T08:28:23.888Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "UretimFisiListesi.cs",
+              "DocumentMoniker": "C:\\Users\\KIRPI\\Downloads\\erp (1)\\erp\\erpv01\\Models\\UretimFisiListesi.cs",
+              "RelativeDocumentMoniker": "Models\\UretimFisiListesi.cs",
+              "ToolTip": "C:\\Users\\KIRPI\\Downloads\\erp (1)\\erp\\erpv01\\Models\\UretimFisiListesi.cs",
+              "RelativeToolTip": "Models\\UretimFisiListesi.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-02T23:21:19.236Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "Liste1.cshtml",
+              "DocumentMoniker": "C:\\Users\\KIRPI\\Downloads\\erp (1)\\erp\\erpv01\\Views\\Uretim\\Liste1.cshtml",
+              "RelativeDocumentMoniker": "Views\\Uretim\\Liste1.cshtml",
+              "ToolTip": "C:\\Users\\KIRPI\\Downloads\\erp (1)\\erp\\erpv01\\Views\\Uretim\\Liste1.cshtml",
+              "RelativeToolTip": "Views\\Uretim\\Liste1.cshtml",
+              "ViewState": "AgIAADMAAAAAAAAAAAAAADwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-12-02T22:41:40.789Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "C:\\Users\\KIRPI\\Downloads\\erp (1)\\erp\\erpv01\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "C:\\Users\\KIRPI\\Downloads\\erp (1)\\erp\\erpv01\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAALcAAAAAAAAAAAAAAM8AAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-12-02T11:01:05.934Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "SureKayitlari.cs",
+              "DocumentMoniker": "C:\\Users\\KIRPI\\Downloads\\erp (1)\\erp\\erpv01\\Controllers\\SureKayitlari.cs",
+              "RelativeDocumentMoniker": "Controllers\\SureKayitlari.cs",
+              "ToolTip": "C:\\Users\\KIRPI\\Downloads\\erp (1)\\erp\\erpv01\\Controllers\\SureKayitlari.cs",
+              "RelativeToolTip": "Controllers\\SureKayitlari.cs",
+              "ViewState": "AgIAADMAAAAAAAAAAAAUwCwAAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-03T08:26:07.946Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "StokController.cs",
+              "DocumentMoniker": "C:\\Users\\KIRPI\\Downloads\\erp (1)\\erp\\erpv01\\Controllers\\StokController.cs",
+              "RelativeDocumentMoniker": "Controllers\\StokController.cs",
+              "ToolTip": "C:\\Users\\KIRPI\\Downloads\\erp (1)\\erp\\erpv01\\Controllers\\StokController.cs",
+              "RelativeToolTip": "Controllers\\StokController.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAkwBwAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-02T11:05:49.057Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "GridModels.cs",
+              "DocumentMoniker": "C:\\Users\\KIRPI\\Downloads\\erp (1)\\erp\\erpv01\\Models\\GridModels.cs",
+              "RelativeDocumentMoniker": "Models\\GridModels.cs",
+              "ToolTip": "C:\\Users\\KIRPI\\Downloads\\erp (1)\\erp\\erpv01\\Models\\GridModels.cs",
+              "RelativeToolTip": "Models\\GridModels.cs",
+              "ViewState": "AgIAABMAAAAAAAAAAAAzwEAAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-02T23:20:34.137Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "SatisController.cs",
+              "DocumentMoniker": "C:\\Users\\KIRPI\\Downloads\\erp (1)\\erp\\erpv01\\Controllers\\SatisController.cs",
+              "RelativeDocumentMoniker": "Controllers\\SatisController.cs",
+              "ToolTip": "C:\\Users\\KIRPI\\Downloads\\erp (1)\\erp\\erpv01\\Controllers\\SatisController.cs",
+              "RelativeToolTip": "Controllers\\SatisController.cs",
+              "ViewState": "AgIAAC8AAAAAAAAAAAAowEQAAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-02T11:09:16.325Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\KIRPI\\Downloads\\erp (1)\\erp\\erpv01\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Users\\KIRPI\\Downloads\\erp (1)\\erp\\erpv01\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAgwDUAAABGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-02T11:03:37.73Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "Login.cshtml",
+              "DocumentMoniker": "C:\\Users\\KIRPI\\Downloads\\erp (1)\\erp\\erpv01\\Views\\Account\\Login.cshtml",
+              "RelativeDocumentMoniker": "Views\\Account\\Login.cshtml",
+              "ToolTip": "C:\\Users\\KIRPI\\Downloads\\erp (1)\\erp\\erpv01\\Views\\Account\\Login.cshtml",
+              "RelativeToolTip": "Views\\Account\\Login.cshtml",
+              "ViewState": "AgIAAG0BAAAAAAAAAAAswHsBAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-12-02T11:00:47.692Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "AccountController.cs",
+              "DocumentMoniker": "C:\\Users\\KIRPI\\Downloads\\erp (1)\\erp\\erpv01\\Controllers\\AccountController.cs",
+              "RelativeDocumentMoniker": "Controllers\\AccountController.cs",
+              "ToolTip": "C:\\Users\\KIRPI\\Downloads\\erp (1)\\erp\\erpv01\\Controllers\\AccountController.cs",
+              "RelativeToolTip": "Controllers\\AccountController.cs",
+              "ViewState": "AgIAACMAAAAAAAAAAAAwwEMAAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-02T11:00:25.401Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "Liste2.cshtml",
+              "DocumentMoniker": "C:\\Users\\KIRPI\\Downloads\\erp (1)\\erp\\erpv01\\Views\\Satis\\Liste2.cshtml",
+              "RelativeDocumentMoniker": "Views\\Satis\\Liste2.cshtml",
+              "ToolTip": "C:\\Users\\KIRPI\\Downloads\\erp (1)\\erp\\erpv01\\Views\\Satis\\Liste2.cshtml",
+              "RelativeToolTip": "Views\\Satis\\Liste2.cshtml",
+              "ViewState": "AgIAAOIAAAAAAAAAAAAQwPgAAABEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-12-02T12:39:21.255Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

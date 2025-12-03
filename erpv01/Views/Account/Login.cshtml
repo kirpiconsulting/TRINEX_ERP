@@ -1,0 +1,408 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Giriş Yap - Trinex ERP</title>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: #fff;
+        }
+
+        .login-container {
+            height: 100vh;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        /* --- SOL TARAFTAKİ MARKALAMA ALANI --- */
+        .brand-section {
+            background: linear-gradient(135deg, #0d6efd 0%, #052c65 100%);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            padding: 40px;
+        }
+
+        /* Arkaplandaki dekoratif daireler */
+        .circle-decoration {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            z-index: 0;
+        }
+
+        .circle-1 {
+            width: 300px;
+            height: 300px;
+            top: -50px;
+            left: -50px;
+        }
+
+        .circle-2 {
+            width: 500px;
+            height: 500px;
+            bottom: -100px;
+            right: -100px;
+        }
+
+        .brand-content {
+            z-index: 1;
+            text-align: center;
+            animation: fadeInUp 1s ease-out;
+            width: 100%; /* Logo rahat yayılsın */
+        }
+
+        /* --- LOGO GÜNCELLEMESİ BURADA DEDEM --- */
+        .login-logo {
+            height: 300px; /* 80px'den 300px'e çıkardık (Yaklaşık 4 Kat) */
+            width: auto; /* En boy oranı bozulmasın */
+            max-width: 80%; /* Mobilde ekrandan taşmasın */
+            margin-bottom: 30px;
+            filter: drop-shadow(0 8px 12px rgba(0,0,0,0.3)); /* Gölgeyi artırdık */
+            background: white;
+            padding: 20px; /* İç boşluğu artırdık */
+            border-radius: 30px; /* Köşeleri daha yumuşattık */
+        }
+
+        .brand-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            letter-spacing: -1px;
+        }
+
+        .brand-features {
+            margin-top: 40px;
+            text-align: left;
+            display: inline-block; /* Ortalamak için */
+        }
+
+        .feature-item {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            opacity: 0;
+            animation: slideIn 0.8s ease-out forwards;
+        }
+
+            .feature-item i {
+                margin-right: 10px;
+                color: #4cc9f0;
+            }
+
+            .feature-item:nth-child(1) {
+                animation-delay: 0.2s;
+            }
+
+            .feature-item:nth-child(2) {
+                animation-delay: 0.4s;
+            }
+
+            .feature-item:nth-child(3) {
+                animation-delay: 0.6s;
+            }
+
+        /* --- SAĞ TARAFTAKİ GİRİŞ ALANI --- */
+        .form-section {
+            background: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+        }
+
+        .login-form-wrapper {
+            width: 100%;
+            max-width: 400px;
+            animation: fadeIn 1.2s ease-out;
+        }
+
+        .form-header {
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+            .form-header h2 {
+                font-weight: 700;
+                color: #333;
+                margin-bottom: 5px;
+            }
+
+            .form-header p {
+                color: #6c757d;
+            }
+
+        /* İkonlu Input Tasarımı */
+        .input-group-custom {
+            position: relative;
+            margin-bottom: 25px;
+        }
+
+            .input-group-custom i {
+                position: absolute;
+                left: 15px;
+                top: 50%;
+                transform: translateY(-50%);
+                color: #adb5bd;
+                z-index: 2;
+                transition: color 0.3s;
+            }
+
+        .form-control-custom {
+            width: 100%;
+            padding: 14px 15px 14px 45px;
+            border: 2px solid #f0f0f0;
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: all 0.3s;
+            background: #f9f9f9;
+        }
+
+            .form-control-custom:focus {
+                border-color: #0d6efd;
+                background: #fff;
+                outline: none;
+                box-shadow: 0 4px 10px rgba(13, 110, 253, 0.1);
+            }
+
+                .form-control-custom:focus + i,
+                .input-group-custom:focus-within i {
+                    color: #0d6efd;
+                }
+
+        .btn-login {
+            width: 100%;
+            padding: 14px;
+            background-color: #0d6efd;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 6px rgba(13, 110, 253, 0.2);
+        }
+
+            .btn-login:hover {
+                background-color: #0b5ed7;
+                transform: translateY(-2px);
+                box-shadow: 0 6px 12px rgba(13, 110, 253, 0.3);
+            }
+
+            .btn-login:active {
+                transform: translateY(0);
+            }
+
+        /* Animasyonlar */
+        @@keyframes fadeInUp {
+            from
+
+        {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        }
+        @@keyframes slideIn {
+            from
+
+        {
+            opacity: 0;
+            transform: translateX(-20px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        }
+        @@keyframes fadeIn {
+            from
+
+        {
+            opacity: 0;
+        }
+
+        to {
+            opacity: 1;
+        }
+
+        }
+
+        /* RESPONSIVE AYARLAR */
+        @@media (max-width: 991px) {
+            .login-container
+
+        {
+            height: auto;
+            min-height: 100vh;
+            overflow-y: auto;
+        }
+
+        .brand-section {
+            padding: 60px 20px;
+            min-height: 400px;
+        }
+        /* Mobilde logo büyük olacağı için alanı yükselttim */
+        .form-section {
+            padding: 60px 20px;
+        }
+
+        .brand-title {
+            font-size: 2rem;
+        }
+
+        .circle-1 {
+            width: 200px;
+            height: 200px;
+        }
+
+        /* Mobilde logo çok devasa olmasın diye biraz kısalım */
+        .login-logo {
+            height: 200px;
+        }
+
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container-fluid p-0">
+        <div class="row g-0 login-container">
+
+            <div class="col-lg-6 brand-section">
+                <div class="circle-decoration circle-1"></div>
+                <div class="circle-decoration circle-2"></div>
+
+                <div class="brand-content">
+                    <img src="~/images/logo.png" alt="Trinex ERP Logo" class="login-logo">
+
+                    <h1 class="brand-title">Trinex ERP</h1>
+                    <p style="opacity: 0.8;">Kurumsal Kaynaklarınızı Güçlendirin</p>
+
+                    <div class="brand-features">
+                        <div class="feature-item">
+                            <i class="fa-solid fa-rocket"></i>
+                            <span>Modern & Hızlı Mimari</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fa-solid fa-shield-halved"></i>
+                            <span>Güvenli Veri Yönetimi</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fa-solid fa-chart-line"></i>
+                            <span>Gelişmiş Raporlama</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6 form-section">
+                <div class="login-form-wrapper">
+                    <div class="form-header">
+                        <h2>Hoş Geldiniz!</h2>
+                        <p>Hesabınıza erişmek için bilgilerinizi girin.</p>
+                    </div>
+
+                    <form id="loginForm">
+                        <div class="input-group-custom">
+                            <input type="text" class="form-control-custom" id="username" placeholder="Kullanıcı Adı" required>
+                            <i class="fa-regular fa-user"></i>
+                        </div>
+
+                        <div class="input-group-custom">
+                            <input type="password" class="form-control-custom" id="password" placeholder="Parola" required>
+                            <i class="fa-solid fa-lock"></i>
+                        </div>
+
+                        <button type="submit" class="btn-login">
+                            Giriş Yap <i class="fa-solid fa-arrow-right ms-2"></i>
+                        </button>
+                    </form>
+
+                    <div style="margin-top: 30px; text-align: center; font-size: 0.85rem; color: #999;">
+                        &copy; 2025 Trinex ERP Yazılım Sistemleri
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // Form Submit Olduğunda
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            var btn = document.querySelector('.btn-login');
+            var originalText = btn.innerHTML;
+
+            var usernameVal = document.getElementById('username').value;
+            var passwordVal = document.getElementById('password').value;
+
+            // Loading Efekti
+            btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Giriş Yapılıyor...';
+            btn.style.opacity = '0.8';
+            btn.disabled = true;
+
+            // AJAX isteği (jQuery veya Fetch ile)
+            fetch('/Account/Login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: new URLSearchParams({
+                    'username': usernameVal,
+                    'password': passwordVal
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Başarılıysa yönlendir
+                    window.location.href = data.redirectUrl;
+                } else {
+                    // Hatalıysa uyar ve butonu eski haline getir
+                    alert(data.message);
+                    btn.innerHTML = originalText;
+                    btn.style.opacity = '1';
+                    btn.disabled = false;
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                btn.innerHTML = originalText;
+                btn.style.opacity = '1';
+                btn.disabled = false;
+            });
+        });
+    </script>
+
+</body>
+</html>

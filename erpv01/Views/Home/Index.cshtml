@@ -1,0 +1,100 @@
+﻿@{
+    ViewData["Title"] = "Uygulama Tanıtımı";
+    Layout = "_Layout";
+}
+
+<div class="container mt-5">
+    <!-- Başlık ve Karşılama -->
+    <div class="text-center mb-5">
+        <h1 class="display-4 fw-bold text-primary">Bartez Üretim Yönetim Sistemi</h1>
+        <p class="lead text-muted">DIA ile tam entegre, yeni nesil üretim takip ve operasyon yönetimi çözümü.</p>
+        <hr class="w-25 mx-auto text-primary opacity-100" style="height: 3px; border-radius: 5px;">
+    </div>
+
+    <!-- Ana Tanıtım Kartı -->
+    <div class="card shadow-lg border-0 mb-5">
+        <div class="card-body p-5">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <h2 class="h3 mb-4">Uygulama Hakkında</h2>
+                    <p class="card-text" style="font-size: 1.1rem; line-height: 1.8;">
+                        Bu yazılım, <strong>Bartez Firması</strong> bünyesinde kullanılmak üzere özel olarak tasarlanmıştır.
+                        Fabrika sahasındaki üretim süreçlerini dijitalleştirmeyi, operatörlerin iş akışlarını hızlandırmayı
+                        ve yönetim katmanına anlık veri akışı sağlamayı hedefler.
+                    </p>
+                    <p class="card-text" style="font-size: 1.1rem; line-height: 1.8;">
+                        DIA ERP sistemi ile çift yönlü ve tam zamanlı entegrasyon sayesinde, üretim bildirimleri,
+                        stok hareketleri ve iş emirleri hatasız bir şekilde yönetilir.
+                    </p>
+                </div>
+                <div class="col-lg-6 text-center">
+                    <!-- İsterseniz buraya firmanın logosunu veya temsili bir görsel koyabilirsiniz -->
+                    <i class="fa-solid fa-industry fa-10x text-primary opacity-25"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Özellikler Listesi (3 Sütun) -->
+    <div class="row g-4">
+        <!-- Kart 1: Operatör -->
+        <div class="col-md-4">
+            <div class="card h-100 border-0 shadow-sm text-center p-4 hover-effect">
+                <div class="mb-3">
+                    <div class="d-inline-flex align-items-center justify-content-center bg-primary bg-opacity-10 text-primary rounded-circle" style="width: 64px; height: 64px;">
+                        <i class="fa-solid fa-users-gear fa-2x"></i>
+                    </div>
+                </div>
+                <h4 class="card-title">Operatör Paneli</h4>
+                <p class="card-text text-muted">
+                    Operatörler, tablet veya kiosklar üzerinden kendilerine atanan iş emirlerini görüntüleyebilir,
+                    üretim başlangıç ve bitiş bildirimlerini kolayca yapabilirler.
+                </p>
+            </div>
+        </div>
+
+        <!-- Kart 2: İş Emirleri -->
+        <div class="col-md-4">
+            <div class="card h-100 border-0 shadow-sm text-center p-4 hover-effect">
+                <div class="mb-3">
+                    <div class="d-inline-flex align-items-center justify-content-center bg-success bg-opacity-10 text-success rounded-circle" style="width: 64px; height: 64px;">
+                        <i class="fa-solid fa-clipboard-list fa-2x"></i>
+                    </div>
+                </div>
+                <h4 class="card-title">İş Emri Yönetimi</h4>
+                <p class="card-text text-muted">
+                    DIA'dan gelen siparişler otomatik olarak iş emrine dönüştürülür.
+                    Planlama departmanı işleri önceliklendirebilir ve tezgahlara atayabilir.
+                </p>
+            </div>
+        </div>
+
+        <!-- Kart 3: DIA Entegrasyon -->
+        <div class="col-md-4">
+            <div class="card h-100 border-0 shadow-sm text-center p-4 hover-effect">
+                <div class="mb-3">
+                    <div class="d-inline-flex align-items-center justify-content-center bg-warning bg-opacity-10 text-warning rounded-circle" style="width: 64px; height: 64px;">
+                        <i class="fa-solid fa-database fa-2x"></i>
+                    </div>
+                </div>
+                <h4 class="card-title">Tam Entegrasyon</h4>
+                <p class="card-text text-muted">
+                    Üretilen mamuller ve tüketilen hammaddeler anında ERP sistemine yansır.
+                    Stok takibi ve maliyetlendirme süreçleri otomatikleşir.
+                </p>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<style>
+    .hover-effect {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+        .hover-effect:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 .5rem 1rem rgba(0,0,0,.15) !important;
+        }
+</style>

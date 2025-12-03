@@ -1,0 +1,97 @@
+﻿@model List<erpv01.Controllers.StokController.StokListeDto>
+
+@{
+    ViewData["Title"] = "Stok Kartları";
+    Layout = "_Layout";
+}
+
+<div class="container-fluid mt-3 mb-3">
+
+    <!-- Üst Toolbar -->
+    <div class="row mb-2">
+        <div class="col-12">
+            <div id="listeToolbar"></div>
+        </div>
+    </div>
+
+    <!-- Grid -->
+    <div class="card shadow-sm border-0">
+        <div class="card-body p-0">
+            <div id="grid" style="height: calc(100vh - 180px); width: 100%;"></div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+
+    liste_ekrani_butonlari_olustur("listeToolbar", {
+        fonksiyonlar: [
+            
+        ],
+        ciktilar: [
+            { }
+        ]
+    });
+
+
+    var tabloVerileri = @Html.Raw(
+        System.Text.Json.JsonSerializer.Serialize(
+            Model,
+            new System.Text.Json.JsonSerializerOptions {
+                PropertyNamingPolicy = System.Text.Json.JsonNamingPolicy.CamelCase
+            }
+        )
+    );
+
+    console.log("Tablo Verileri:", tabloVerileri);
+
+    // ---------------------------------------------------------------------
+    // 3) GRID SÜTUNLARI
+    // ---------------------------------------------------------------------
+    var tabloSutunlari = [
+        { header: 'Kod', name: 'kod', width: 120 },
+        { header: 'Ad', name: 'ad', width: 120 },
+        { header: 'Birim', name: 'birim', width: 120 },
+        { header: 'Özellikler', name: 'ozellikler', minWidth: 200 },
+        { header: 'Resim', name: 'resim', minWidth: 200, hidden : true }
+    ];
+
+    // ---------------------------------------------------------------------
+    // 4) GRID OLUŞTUR
+    // ---------------------------------------------------------------------
+    window.myGrid = liste_gridi_olustur("grid", tabloVerileri, tabloSutunlari, {
+        filtreleme: true,
+        siralama: true,
+        excel: true,
+        temizle: true,
+        sutunSecimi: true,
+        secim: true,
+        toplam: false,
+        sabitKolonSayisi: 0,
+        bodyHeight: 'fitToParent'
+    });
+});
+
+// -------------------------------------------------------------------------
+// 5) BUTON EVENTLERİ
+// -------------------------------------------------------------------------
+
+
+
+</script>
+
+<script>
+    $(document).ready(function() {
+        $(".btn-erp-yeni").remove();
+        $(".btn-erp-kaydet").remove();
+        $(".btn-erp-guncelle").remove();
+        $(".btn-erp-sil").remove();
+        $(".btn-erp-cikti").remove();
+        $(".btn-erp-fonksiyon").remove();
+    });
+</script>
+}
