@@ -68,6 +68,8 @@ public partial class AppDbContext : DbContext
 
     public virtual DbSet<UretimFisleri> UretimFisleris { get; set; }
 
+    public virtual DbSet<UrunOzellikleri> UrunOzellikleris { get; set; }
+
     public virtual DbSet<VeriSetiKalemleri> VeriSetiKalemleris { get; set; }
 
     public virtual DbSet<VeriSetleri> VeriSetleris { get; set; }
@@ -1184,6 +1186,26 @@ public partial class AppDbContext : DbContext
             entity.Property(e => e.OlusturmaTarihi)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnName("olusturma_tarihi");
+            entity.Property(e => e.OzelKod01)
+                .HasMaxLength(50)
+                .IsFixedLength()
+                .HasColumnName("ozel_kod01");
+            entity.Property(e => e.OzelKod02)
+                .HasMaxLength(50)
+                .IsFixedLength()
+                .HasColumnName("ozel_kod02");
+            entity.Property(e => e.OzelKod03)
+                .HasMaxLength(50)
+                .IsFixedLength()
+                .HasColumnName("ozel_kod03");
+            entity.Property(e => e.OzelKod04)
+                .HasMaxLength(50)
+                .IsFixedLength()
+                .HasColumnName("ozel_kod04");
+            entity.Property(e => e.OzelKod05)
+                .HasMaxLength(50)
+                .IsFixedLength()
+                .HasColumnName("ozel_kod05");
             entity.Property(e => e.SatisFiyati1)
                 .HasDefaultValue(0m)
                 .HasColumnType("decimal(18, 4)")
@@ -2158,6 +2180,43 @@ public partial class AppDbContext : DbContext
                 .IsUnicode(false)
                 .IsFixedLength()
                 .HasColumnName("yan_urun_deposu_kodu");
+        });
+
+        modelBuilder.Entity<UrunOzellikleri>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__urun_oze__3213E83FD7C36153");
+
+            entity.ToTable("urun_ozellikleri");
+
+            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.AktifMi).HasColumnName("aktif_mi");
+            entity.Property(e => e.AnahtarAciklama)
+                .HasMaxLength(100)
+                .HasColumnName("anahtar_aciklama");
+            entity.Property(e => e.DegerAciklama)
+                .HasMaxLength(100)
+                .HasColumnName("deger_aciklama");
+            entity.Property(e => e.EkAlan1).HasColumnName("ek_alan_1");
+            entity.Property(e => e.EkAlan10).HasColumnName("ek_alan_10");
+            entity.Property(e => e.EkAlan2).HasColumnName("ek_alan_2");
+            entity.Property(e => e.EkAlan3).HasColumnName("ek_alan_3");
+            entity.Property(e => e.EkAlan4).HasColumnName("ek_alan_4");
+            entity.Property(e => e.EkAlan5).HasColumnName("ek_alan_5");
+            entity.Property(e => e.EkAlan6).HasColumnName("ek_alan_6");
+            entity.Property(e => e.EkAlan7).HasColumnName("ek_alan_7");
+            entity.Property(e => e.EkAlan8).HasColumnName("ek_alan_8");
+            entity.Property(e => e.EkAlan9).HasColumnName("ek_alan_9");
+            entity.Property(e => e.GuncellemeTarihi).HasColumnName("guncelleme_tarihi");
+            entity.Property(e => e.GuncelleyenKullanici)
+                .HasMaxLength(100)
+                .HasColumnName("guncelleyen_kullanici");
+            entity.Property(e => e.OlusturanKullanici)
+                .HasMaxLength(100)
+                .HasColumnName("olusturan_kullanici");
+            entity.Property(e => e.OlusturmaTarihi).HasColumnName("olusturma_tarihi");
+            entity.Property(e => e.StokKod)
+                .HasMaxLength(100)
+                .HasColumnName("stok_kod");
         });
 
         modelBuilder.Entity<VeriSetiKalemleri>(entity =>

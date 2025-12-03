@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\KIRPI\\Downloads\\erp (1)\\erp\\erpv01\\erpv01.csproj": {}
+    "C:\\Users\\KIRPI\\Documents\\proje\\erpv01\\erpv01.csproj": {}
   },
   "projects": {
-    "C:\\Users\\KIRPI\\Downloads\\erp (1)\\erp\\erpv01\\erpv01.csproj": {
+    "C:\\Users\\KIRPI\\Documents\\proje\\erpv01\\erpv01.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\KIRPI\\Downloads\\erp (1)\\erp\\erpv01\\erpv01.csproj",
+        "projectUniqueName": "C:\\Users\\KIRPI\\Documents\\proje\\erpv01\\erpv01.csproj",
         "projectName": "erpv01",
-        "projectPath": "C:\\Users\\KIRPI\\Downloads\\erp (1)\\erp\\erpv01\\erpv01.csproj",
+        "projectPath": "C:\\Users\\KIRPI\\Documents\\proje\\erpv01\\erpv01.csproj",
         "packagesPath": "C:\\Users\\KIRPI\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\KIRPI\\Downloads\\erp (1)\\erp\\erpv01\\obj\\",
+        "outputPath": "C:\\Users\\KIRPI\\Documents\\proje\\erpv01\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

@@ -41,6 +41,16 @@ public partial class Stoklar
 
     public string? GenelAciklama { get; set; }
 
+    public string? OzelKod01 { get; set; }
+
+    public string? OzelKod02 { get; set; }
+
+    public string? OzelKod03 { get; set; }
+
+    public string? OzelKod04 { get; set; }
+
+    public string? OzelKod05 { get; set; }
+
     public string? EkAlan1 { get; set; }
 
     public string? EkAlan2 { get; set; }
