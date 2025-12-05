@@ -5,6 +5,25 @@
     Layout = "_Layout";
 }
 
+
+<style>
+    /* İş emri açılmış satırlar için açık turuncu/sarı tonu */
+    .tui-grid-row-is-emri-var {
+        background-color: #ffeeba !important; 
+        color: #856404 !important;
+        font-weight: bold;
+    }
+    
+    /* Hover olduğunda rengi bozulmasın istersen bunu da ekle */
+    .tui-grid-row-is-emri-var:hover {
+        background-color: #ffe8a1 !important;
+    }
+</style>
+
+
+
+
+
 <div class="container-fluid mt-3 mb-3">
 
     <div class="row mb-2">
@@ -102,6 +121,19 @@ document.addEventListener("DOMContentLoaded", function () {
         )
     );
 
+
+    tabloVerileri.forEach(function(satir) {
+    // Eğer Açılan İş Emri Miktarı 0'dan büyükse
+        if (satir.acilanIsEmriMiktari > 0) {
+            // O satıra özel class ekle (Toast UI Grid yapısına uygun)
+            satir._attributes = {
+                className: {
+                    row: ['tui-grid-row-is-emri-var'] // Yukarıda yazdığımız CSS class adı
+                }
+            };
+        }
+    });
+
  
 
     // ---------------------------
@@ -131,6 +163,7 @@ document.addEventListener("DOMContentLoaded", function () {
         toplam: false,
         sabitKolonSayisi: 0,
         bodyHeight: 'fitToParent'
+    
     });
 
 });

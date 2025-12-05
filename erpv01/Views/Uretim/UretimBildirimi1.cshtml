@@ -8,19 +8,29 @@
 <div class="container-fluid mt-3">
 
     <div class="row mb-3">
-        <div class="col-12 col-md-4">
-            <label class="fw-semibold mb-1">Operatör Seçimi</label>
-            <select id="operatorSelect" class="form-select">
-                <option value="">-- Operatör Seçin --</option>
 
-                @foreach (var op in Model)
-                {
-                    <option value="@op.Kod"
-                            data-tezgah="@op.CalisabilecegiTezgahlar">
-                        @op.Ad
-                    </option>
-                }
-            </select>
+        <!-- 1. DEĞİŞİKLİK: Operatör Seçimi (Input Yapısı) -->
+        <div class="col-12 col-md-4">
+            <label class="fw-semibold mb-1">Operatör Kodu</label>
+            <div class="input-group">
+                <!-- Kod Giriş Alanı -->
+                <input id="operatorInput" type="text" class="form-control" placeholder="Sicil No Girin ve Enter" />
+
+                <!-- İsim Gösterge Alanı (Salt Okunur) -->
+                <input id="operatorAdDisplay" type="text" class="form-control bg-light" readonly placeholder="Operatör Adı" />
+
+                <!-- Temizle Butonu -->
+                <button class="btn btn-outline-secondary" type="button" onclick="operatorTemizle()">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- İş Emri No -->
+        <div class="col-12 col-md-4">
+            <label class="fw-semibold mb-1">İş Emri No</label>
+            <input id="isemriInput" type="text" class="form-control"
+                   placeholder="Örn: 000123-00" />
         </div>
     </div>
 
@@ -53,7 +63,7 @@
 
                     <div id="seciliDetayBolumu">
                         <div id="seciliDetayBos" class="text-muted text-center mb-2">
-                            Bekleyen iş emirlerinden bir satıra <b>çift tıklayın</b> 
+                            Bekleyen iş emirlerinden bir satıra <b>çift tıklayın</b>
                         </div>
 
                         <div id="seciliDetayIcerik" style="display:none;">
@@ -96,11 +106,7 @@
                     <div id="uretBilToolbar"
                          class="mt-2 d-flex justify-content-end gap-2"
                          style="display:none;">
-                        <button type="button"
-                                class="btn-erp-base"
-                                onclick="btnStoklariGetirClick()">
-                            <i class="fa-solid fa-box-open me-1"></i> Stokları Getir
-                        </button>
+                        @* Stokları Getir butonu artık otomatik çalışıyor, burası gizli kalabilir veya açılabilir *@
                     </div>
 
                     <div id="lotGridContainer" class="mt-2"
@@ -120,7 +126,7 @@
             </div>
         </div>
 
-        <!-- TAMAMLANAN İŞ EMİRLERİ (Şimdilik dummy) -->
+        <!-- TAMAMLANAN İŞ EMİRLERİ -->
         <div class="col-12 col-lg-4 mb-3">
             <div class="card shadow-sm h-100">
                 <div class="card-header py-2">
@@ -135,25 +141,171 @@
             </div>
         </div>
 
-
     </div>
 
 </div>
 
 @section Scripts {
     <script>
-        // Global Değişkenler
+        // =========================================================
+        // 1. GLOBAL DEĞİŞKENLER VE MODEL
+        // =========================================================
+
+        // Server tarafındaki operatör listesini JS değişkenine alıyoruz
+        const operatorListesi = @Html.Raw(Json.Serialize(Model));
+
         let seciliIsEmriRow = null;
         let lotGrid = null;
         let bekleyenGrid = null;
         let tamamlananGrid = null;
 
+
         // =========================================================
-        // 1. STOKLARI GETİR
+        // 2. İŞ EMRİ ARAMA (ENTER İLE SEÇİM)
+        // =========================================================
+        document.getElementById("isemriInput").addEventListener("keyup", function (e) {
+            var aranan = this.value.trim();
+            if (!aranan) return;
+
+            // Sadece ENTER tuşuna basıldığında işlem yap
+            if (e.key === "Enter") {
+                var rows = window.bekleyenGrid.getData();
+                let bulunanIndex = -1;
+
+                // Find ile ilk eşleşen kaydı bul (daha hızlı)
+                const bulunanSatir = rows.find(row =>
+                    row.isEmriNumarasi && row.isEmriNumarasi.toString().trim() === aranan.toString().trim()
+                );
+
+                if (bulunanSatir) {
+                    bulunanIndex = bulunanSatir.rowKey;
+
+                    // Satırı görsel olarak seç
+                    window.bekleyenGrid.uncheckAll();
+                    window.bekleyenGrid.check(bulunanIndex);
+                    window.bekleyenGrid.focus(bulunanIndex, "isEmriNumarasi");
+
+                    // Detay fonksiyonunu çağır
+                    isemridetaygetir(bulunanIndex);
+
+                    this.value = ""; // Inputu temizle
+                    showToast("İş emri seçildi!", "success");
+                } else {
+                    showToast("İş emri listede bulunamadı!", "warning");
+                }
+            }
+        });
+
+
+        // =========================================================
+        // 3. OPERATÖR İŞLEMLERİ (INPUT GİRİŞİ)
+        // =========================================================
+
+        // Operatör Input'u Enter Dinleme
+        document.getElementById("operatorInput").addEventListener("keyup", function(e) {
+            if (e.key !== "Enter") return; // Sadece Enter'da çalış
+
+            const girilenKod = this.value.trim();
+            if (!girilenKod) return;
+
+            // JS listesinden operatörü bul (Büyük/küçük harf duyarsız)
+            const bulunanOperator = operatorListesi.find(op =>
+                op.kod && op.kod.toString().toLowerCase() === girilenKod.toLowerCase()
+            );
+
+            if (bulunanOperator) {
+                // İsmi ekrana yaz
+                document.getElementById("operatorAdDisplay").value = bulunanOperator.ad;
+
+                // Tezgah verilerini parse et
+                const tezgahStr = bulunanOperator.calisabilecegiTezgahlar || "";
+                const tezgahlar = tezgahStr.split("|").map(x => x.trim()).filter(x => x.length > 0);
+
+                // Verileri getir
+                verileriGetir(girilenKod, tezgahlar);
+
+            } else {
+                showToast("Operatör bulunamadı!", "error");
+                operatorTemizle(false); // False: inputu silme, diğerlerini temizle
+            }
+        });
+
+        // Operatör Temizleme Butonu Fonksiyonu
+        function operatorTemizle(inputuSil = true) {
+            if(inputuSil) document.getElementById("operatorInput").value = "";
+            document.getElementById("operatorAdDisplay").value = "";
+
+            // Gridleri ve ekranı sıfırla
+            if(window.bekleyenGrid) window.bekleyenGrid.resetData([]);
+            if(window.tamamlananGrid) window.tamamlananGrid.resetData([]);
+
+            // Detay ekranını sıfırla
+            ekranSifirla();
+        }
+
+        // Ekranı resetleyen yardımcı fonksiyon
+        function ekranSifirla() {
+            seciliIsEmriRow = null;
+            if (document.getElementById("seciliDetayBos"))
+                document.getElementById("seciliDetayBos").style.display = "block";
+            if (document.getElementById("seciliDetayIcerik"))
+                document.getElementById("seciliDetayIcerik").style.display = "none";
+            if (document.getElementById("uretBilToolbar"))
+                document.getElementById("uretBilToolbar").style.display = "none";
+            if (document.getElementById("kaydet"))
+                document.getElementById("kaydet").style.setProperty("display", "none", "important");
+            if (lotGrid) lotGrid.resetData([]);
+        }
+
+        // API'den Veri Çeken Fonksiyon
+        function verileriGetir(opKod, tezgahlar) {
+            if (tezgahlar.length === 0) {
+                showToast("Bu operatör için tanımlı tezgah bulunamadı.", "warning");
+                ekranSifirla();
+                return;
+            }
+
+            // BEKLEYENLERİ ÇEK
+            fetch("/Uretim/BekleyenIsEmirleri", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ operatorKod: opKod, tezgahlar: tezgahlar })
+            })
+            .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+            .then(res => {
+                if (res.success) {
+                    window.bekleyenGrid.resetData(res.data || []);
+                    ekranSifirla(); // Yeni operatör gelince seçili detay temizlensin
+                    if ((res.data || []).length === 0) showToast("Bekleyen iş emri yok.", "info");
+                } else {
+                    showToast(res.message, "error");
+                    window.bekleyenGrid.resetData([]);
+                }
+            })
+            .catch(err => console.error(err));
+
+            // TAMAMLANANLARI ÇEK
+            fetch("/Uretim/TamamlananIsEmirleri", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ operatorKod: opKod, tezgahlar: tezgahlar })
+            })
+            .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+            .then(res => {
+                if (res.success) {
+                    window.tamamlananGrid.resetData(res.data || []);
+                }
+            })
+            .catch(err => console.error("Tamamlananlar hatası:", err));
+        }
+
+
+        // =========================================================
+        // 4. STOKLARI GETİR (Otomatik Çağrılan)
         // =========================================================
         function btnStoklariGetirClick() {
             if (!seciliIsEmriRow) {
-                showToast("Lütfen önce bekleyen iş emirlerinden bir satıra çift tıklayın.", "warning");
+                // showToast("Lütfen önce bekleyen iş emirlerinden bir satıra çift tıklayın.", "warning");
                 return;
             }
 
@@ -205,185 +357,13 @@
             });
         }
 
-        // =========================================================
-        // 2. SATIR EKLE (İstersen kullanırsın)
-        // =========================================================
-        function lotSatirEkle() {
-            if (!lotGrid) {
-                showToast("Önce bir iş emri seçip stokları getir.", "warning");
-                return;
-            }
-            const base = lotGrid.getRow(0) || {};
-            lotGrid.appendRow({
-                stokKodu: base.stokKodu || "",
-                stokAdi: base.stokAdi || "",
-                stokBirim: base.stokBirim || "",
-                depoKodu: base.depoKodu || "",
-                depoAdi: base.depoAdi || "",
-                lotKodu: "",
-                miktar: 0
-            }, { at: lotGrid.getRowCount() });
-        }
 
         // =========================================================
-        // 3. LOT GRID YAPISI
+        // 5. DETAY GÖSTERME FONKSİYONU
         // =========================================================
-        function initLotGrid(initialData) {
-
-            // Silme Butonu
-            class SilButtonRenderer {
-                constructor(props) {
-                    const el = document.createElement("button");
-                    el.type = "button";
-                    el.className = "btn btn-sm btn-outline-danger border-0";
-                    el.innerHTML = '<i class="fa-solid fa-trash"></i>';
-                    el.onclick = (e) => { e.stopPropagation(); props.grid.removeRow(props.rowKey); };
-                    this.el = el;
-                }
-                getElement() { return this.el; }
-            }
-
-            // Kopyala Butonu
-            class KopyalaButtonRenderer {
-                constructor(props) {
-                    const el = document.createElement("button");
-                    el.type = "button";
-                    el.className = "btn btn-sm btn-outline-primary border-0 me-1";
-                    el.innerHTML = '<i class="fa-solid fa-copy"></i>';
-                    el.onclick = (e) => {
-                        e.stopPropagation();
-                        const row = props.grid.getRow(props.rowKey);
-                        props.grid.appendRow({
-                            stokKodu: row.stokKodu,
-                            stokAdi: row.stokAdi,
-                            stokBirim: row.stokBirim,
-                            depoKodu: row.depoKodu,
-                            depoAdi: row.depoAdi,
-                            lotKodu: "",
-                            miktar: 0
-                        }, { at: props.rowKey + 1 });
-                    };
-                    this.el = el;
-                }
-                getElement() { return this.el; }
-            }
-
-            // İşlemler Kolonu
-            class IslemlerRenderer {
-                constructor(props) {
-                    const div = document.createElement("div");
-                    div.className = "text-center";
-
-                    const btnKopyala = new KopyalaButtonRenderer(props).getElement();
-                    const btnSil = new SilButtonRenderer(props).getElement();
-
-                    div.appendChild(btnKopyala);
-                    div.appendChild(btnSil);
-                    this.el = div;
-                }
-                getElement() { return this.el; }
-            }
-
-            const lotKolonlar = [
-                { header: "Stok Kodu",   name: "stokKodu",  width: 100 },
-                { header: "Stok Adı",    name: "stokAdi",   minWidth: 150 },
-                { header: "Stok Birim",  name: "stokBirim", minWidth: 80 },
-                { header: "Depo Kodu",   name: "depoKodu",  width: 80 },
-                { header: "Depo Adı",    name: "depoAdi",   minWidth: 100 },
-                {
-                    header: "Lot No",
-                    name: "lotKodu",
-                    width: 120,
-                    editor: { type: "text" }
-                },
-                {
-                    header: "Miktar",
-                    name: "miktar",
-                    width: 90,
-                    align: "right",
-                    editor: { type: "text" }
-                },
-                {
-                    header: "İşlemler",
-                    name: "_islemler",
-                    width: 90,
-                    align: "center",
-                    renderer: { type: IslemlerRenderer }
-                }
-            ];
-
-            lotGrid = liste_gridi_olustur("lotGridContainer", initialData, lotKolonlar, {
-                filtreleme: false,
-                siralama: false,
-                temizle: false,
-                bodyHeight: 100,
-                secim: false,
-                excel: false,
-                sutunSecimi: false,
-            });
-        }
-
-        // =========================================================
-        // 4. SAYFA YÜKLENİNCE
-        // =========================================================
-        document.addEventListener("DOMContentLoaded", function () {
-
-            const operatorSelect = document.getElementById("operatorSelect");
-
-            // Bekleyen İş Emirleri Grid
-            const bekleyenKolonlar = [
-                { header: "İş Emri No",  name: "isEmriNumarasi",  width: 120 },
-                { header: "Kalem",       name: "kalemKodu",       width: 90 },
-                { header: "Tezgah Kod",  name: "tezgahKodu",      hidden: true },
-                { header: "Tezgah",      name: "tezgahAdi",       minWidth: 120 },
-                { header: "Başlangıç",   name: "baslangicTarihi", width: 130 },
-                { header: "Stok Kodu",   name: "stokKodu",        width: 110 },
-                { header: "Stok Adı",    name: "stokAdi",         minWidth: 180 },
-                { header: "Birim",       name: "birim",           width: 70 },
-                { header: "Özellik",     name: "stokOzellikler",  minWidth: 100 }
-            ];
-
-
-            const tamamlananKolonlar = [
-                { header: "İş Emri No",  name: "isEmriNumarasi",  width: 120 },
-                { header: "Kalem",       name: "kalemKodu",       width: 90 },
-                { header: "Tezgah Kod",  name: "tezgahKodu",      hidden: true },
-                { header: "Tezgah",      name: "tezgahAdi",       minWidth: 120 },
-                { header: "Başlangıç",   name: "baslangicTarihi", width: 130 },
-                { header: "Bitiş",       name: "bitisTarihi",     width: 130 },  // 👉 Eklenen kolon
-                { header: "Stok Kodu",   name: "stokKodu",        width: 110 },
-                { header: "Stok Adı",    name: "stokAdi",         minWidth: 180 },
-                { header: "Birim",       name: "birim",           width: 70 },
-                { header: "Özellik",     name: "stokOzellikler",  minWidth: 100 }
-            ];
-
-
-            window.bekleyenGrid = liste_gridi_olustur("bekleyenGrid", [], bekleyenKolonlar, {
-                filtreleme: true,
-                siralama: true,
-                temizle: true,
-                sutunSecimi: true,
-                bodyHeight: 'fitToParent',
-                secim: false,
-                excel: false,
-            });
-
-
-            window.tamamlananGrid = liste_gridi_olustur("tamamlananGrid", [], tamamlananKolonlar, {
-                filtreleme: true,
-                siralama: true,
-                temizle: true,
-                sutunSecimi: true,
-                bodyHeight: 'fitToParent',
-                secim: false,
-                excel: false,
-            });
-
-
-            // Bekleyen Grid Çift Tıklama
-            window.bekleyenGrid.on('dblclick', function (ev) {
-                if (ev.rowKey === undefined || ev.rowKey === null) return;
-                const row = window.bekleyenGrid.getRow(ev.rowKey);
+        function isemridetaygetir(rowKey) {
+             if (rowKey === undefined || rowKey === null) return;
+                const row = window.bekleyenGrid.getRow(rowKey);
                 if (!row) return;
 
                 seciliIsEmriRow = row;
@@ -410,100 +390,117 @@
                 document.getElementById("d_stokOzellikler").innerText  = row.stokOzellikler  || "";
 
                 if (lotGrid) lotGrid.resetData([]);
+
+                // Otomatik olarak stokları getir
+                btnStoklariGetirClick();
+        }
+
+
+        // =========================================================
+        // 6. GRID OLUŞTURMA VE SAYFA YÜKLENMESİ
+        // =========================================================
+
+        // Lot Grid Yapılandırması
+        function initLotGrid(initialData) {
+            class SilButtonRenderer {
+                constructor(props) {
+                    const el = document.createElement("button");
+                    el.type = "button";
+                    el.className = "btn btn-sm btn-outline-danger border-0";
+                    el.innerHTML = '<i class="fa-solid fa-trash"></i>';
+                    el.onclick = (e) => { e.stopPropagation(); props.grid.removeRow(props.rowKey); };
+                    this.el = el;
+                }
+                getElement() { return this.el; }
+            }
+
+            class KopyalaButtonRenderer {
+                constructor(props) {
+                    const el = document.createElement("button");
+                    el.type = "button";
+                    el.className = "btn btn-sm btn-outline-primary border-0 me-1";
+                    el.innerHTML = '<i class="fa-solid fa-copy"></i>';
+                    el.onclick = (e) => {
+                        e.stopPropagation();
+                        const row = props.grid.getRow(props.rowKey);
+                        props.grid.appendRow({
+                            stokKodu: row.stokKodu,
+                            stokAdi: row.stokAdi,
+                            stokBirim: row.stokBirim,
+                            depoKodu: row.depoKodu,
+                            depoAdi: row.depoAdi,
+                            lotKodu: "",
+                            miktar: 0
+                        }, { at: props.rowKey + 1 });
+                    };
+                    this.el = el;
+                }
+                getElement() { return this.el; }
+            }
+
+            class IslemlerRenderer {
+                constructor(props) {
+                    const div = document.createElement("div");
+                    div.className = "text-center";
+                    const btnKopyala = new KopyalaButtonRenderer(props).getElement();
+                    const btnSil = new SilButtonRenderer(props).getElement();
+                    div.appendChild(btnKopyala);
+                    div.appendChild(btnSil);
+                    this.el = div;
+                }
+                getElement() { return this.el; }
+            }
+
+            const lotKolonlar = [
+                { header: "Stok Kodu",   name: "stokKodu",  width: 100 },
+                { header: "Stok Adı",    name: "stokAdi",   minWidth: 150 },
+                { header: "Stok Birim",  name: "stokBirim", minWidth: 80 },
+                { header: "Depo Kodu",   name: "depoKodu",  width: 80 },
+                { header: "Depo Adı",    name: "depoAdi",   minWidth: 100 },
+                { header: "Lot No", name: "lotKodu", width: 120, editor: { type: "text" } },
+                { header: "Miktar", name: "miktar", width: 90, align: "right", editor: { type: "text" } },
+                { header: "İşlemler", name: "_islemler", width: 90, align: "center", renderer: { type: IslemlerRenderer } }
+            ];
+
+            lotGrid = liste_gridi_olustur("lotGridContainer", initialData, lotKolonlar, {
+                filtreleme: false, siralama: false, temizle: false, bodyHeight: 100, secim: false, excel: false, sutunSecimi: false,
+            });
+        }
+
+        // DOM Ready
+        document.addEventListener("DOMContentLoaded", function () {
+
+            // Bekleyen Grid
+            const bekleyenKolonlar = [
+                { header: "İş Emri No",  name: "isEmriNumarasi",  width: 120 },
+                { header: "Marka",       name: "stokMarka",       width: 90 },
+                { header: "Model",       name: "stokModel",       width: 90 }
+            ];
+
+            // Tamamlanan Grid
+            const tamamlananKolonlar = [
+                { header: "İş Emri No",  name: "isEmriNumarasi",  width: 120 },
+                { header: "Marka",       name: "stokMarka",       width: 90 },
+                { header: "Model",       name: "stokModel",       width: 90 }
+            ];
+
+            window.bekleyenGrid = liste_gridi_olustur("bekleyenGrid", [], bekleyenKolonlar, {
+                filtreleme: true, siralama: true, temizle: true, sutunSecimi: true, bodyHeight: 'fitToParent', secim: false, excel: false,
             });
 
-            if (!operatorSelect) return;
+            window.tamamlananGrid = liste_gridi_olustur("tamamlananGrid", [], tamamlananKolonlar, {
+                filtreleme: true, siralama: true, temizle: true, sutunSecimi: true, bodyHeight: 'fitToParent', secim: false, excel: false,
+            });
 
-            // Operatör Değişimi
-            operatorSelect.addEventListener("change", function () {
-                const kod = this.value;
-
-                function ekranSifirla() {
-                    seciliIsEmriRow = null;
-                    if (document.getElementById("seciliDetayBos"))
-                        document.getElementById("seciliDetayBos").style.display = "block";
-                    if (document.getElementById("seciliDetayIcerik"))
-                        document.getElementById("seciliDetayIcerik").style.display = "none";
-                    if (document.getElementById("uretBilToolbar"))
-                        document.getElementById("uretBilToolbar").style.display = "none";
-                    if (document.getElementById("kaydet"))
-                        document.getElementById("kaydet").style.setProperty("display", "none", "important");
-                    if (lotGrid) lotGrid.resetData([]);
-                }
-
-                if (!kod) {
-                    window.bekleyenGrid.resetData([]);
-                    ekranSifirla();
-                    return;
-                }
-
-                const selectedOpt = this.selectedOptions[0];
-                const tezgahStr = (selectedOpt && selectedOpt.getAttribute("data-tezgah")) || "";
-                const tezgahlar = tezgahStr.split("|").map(x => x.trim()).filter(x => x.length > 0);
-
-                if (tezgahlar.length === 0) {
-                    window.bekleyenGrid.resetData([]);
-                    ekranSifirla();
-                    showToast("Bu operatör için tanımlı tezgah bulunamadı.", "warning");
-                    return;
-                }
-
-                fetch("/Uretim/BekleyenIsEmirleri", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ operatorKod: kod, tezgahlar: tezgahlar })
-                })
-                .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
-                .then(res => {
-                    if (res.success !== true) {
-                        showToast(res.message, "error");
-                        window.bekleyenGrid.resetData([]);
-                        ekranSifirla();
-                        return;
-                    }
-                    window.bekleyenGrid.resetData(res.data || []);
-                    ekranSifirla();
-                    if ((res.data || []).length === 0) showToast("Bekleyen iş emri yok.", "info");
-                })
-                .catch(err => {
-                    console.error(err);
-                    showToast("Sunucu hatası!", "error");
-                });
-
-
-
-                        // TAMAMLANAN İŞ EMİRLERİ GETİR
-                fetch("/Uretim/TamamlananIsEmirleri", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ operatorKod: kod, tezgahlar: tezgahlar })
-                })
-                .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
-                .then(res => {
-                    if (res.success !== true) {
-                        window.tamamlananGrid.resetData([]);
-                        return;
-                    }
-                    window.tamamlananGrid.resetData(res.data || []);
-                })
-                .catch(err => {
-                    console.error(err);
-                    showToast("Tamamlanan iş emirleri alınamadı.", "error");
-                });
-
-
-
-
-
-
-
-
-
+            // Grid Çift Tıklama Eventi
+            window.bekleyenGrid.on('dblclick', function (ev) {
+               isemridetaygetir(ev.rowKey);
             });
         });
 
+
         // =========================================================
-        // 5. KAYDET
+        // 7. KAYDETME İŞLEMİ
         // =========================================================
         function btnKaydet() {
             if (!lotGrid) {
@@ -514,11 +511,6 @@
             lotGrid.blur();
 
             const rawData = lotGrid.getData();
-            //if (!rawData || rawData.length === 0) {
-            //    showToast("Kaydedilecek satır yok.", "warning");
-           //     return;
-           // }
-
             const cleanData = rawData.map(satir => {
                 let miktarStr = String(satir.miktar !== null && satir.miktar !== undefined ? satir.miktar : 0);
                 miktarStr = miktarStr.replace(',', '.');
@@ -530,7 +522,8 @@
                 };
             });
 
-            const operatorKod = document.getElementById("operatorSelect").value;
+            // 2. DEĞİŞİKLİK: Operatör kodunu artık Input'tan alıyoruz
+            const operatorKod = document.getElementById("operatorInput").value;
 
             const baslikBilgisi = {
                 IsEmriNo:        document.getElementById("d_isEmriNumarasi").innerText,

@@ -5,6 +5,33 @@
     Layout = "_Layout";
 }
 
+
+<style>
+    /* Durum 1: İş Emri Oluşturuldu (Mavi tonu - Başlangıç) */
+    .durum-1-satir {
+        background-color: #e3f2fd !important; /* Açık Mavi */
+        color: #0d47a1 !important;
+    }
+
+    /* Durum 2: Üretime Gönderildi (Sarı/Turuncu tonu - İşlemde) */
+    .durum-2-satir {
+        background-color: #fff3cd !important; /* Açık Sarı */
+        color: #856404 !important;
+    }
+
+    /* Durum 3: Üretim Tamamlandı (Yeşil tonu - Bitti) */
+    .durum-3-satir {
+        background-color: #d4edda !important; /* Açık Yeşil */
+        color: #155724 !important;
+    }
+
+    /* Hover efektleri (Üzerine gelince renk bozulmasın) */
+    .durum-1-satir:hover { background-color: #bbdefb !important; }
+    .durum-2-satir:hover { background-color: #ffeeba !important; }
+    .durum-3-satir:hover { background-color: #c3e6cb !important; }
+</style>                             
+
+
 <div class="container-fluid mt-3 mb-3">
 
     <!-- TOOLBAR -->
@@ -53,7 +80,26 @@
         )
     );
 
-    console.log("Üretim Data:", tabloVerileri);
+    tabloVerileri.forEach(function(satir) {
+    let cssClass = "";
+
+    if (satir.durum === 1) {
+        cssClass = "durum-1-satir";
+    } else if (satir.durum === 2) {
+        cssClass = "durum-2-satir";
+    } else if (satir.durum === 3) {
+        cssClass = "durum-3-satir";
+    }
+
+    if (cssClass !== "") {
+        satir._attributes = {
+            className: {
+                row: [cssClass]
+            }
+        };
+    }
+});
+
 
     // ----------------------------------
     // 3) SÜTUNLAR
@@ -67,7 +113,9 @@
         { header: "Birim", name: "birim", width: 70 },
         { header: "Durum Kodu", name: "durum", width: 100 },
         { header: "Durum Açıklaması", name: "durumAciklama", width: 150 },
-        { header: "Özellik", name: "stokOzellikler", minWidth: 120 }
+        { header: "Özellik", name: "stokOzellikler", minWidth: 120 },
+        { header: "Sipariş Evrak Numarası", name: "siparisEvrakNo", minWidth: 120 },
+        { header: "Sipariş Kalem Numarası", name: "siparisKalemKodu", minWidth: 120 }
     ];
 
     // ----------------------------------

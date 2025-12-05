@@ -112,19 +112,52 @@ namespace erpv01.Controllers
             if (liste == null || liste.Count == 0)
                 return Json(new { success = false, message = "Gönderilen veri yok!" });
 
-            var sonKayit = _db.IsEmirleris
-                .OrderByDescending(x => x.EvrakNo.Length) // 1. Kural: Uzun olan büyüktür (10 > 9)
-                .ThenByDescending(x => x.EvrakNo)       // 2. Kural: Uzunluk aynıysa değere bak (11 > 10)
-                .FirstOrDefault();
+            const int YilBaslangicKodu = 1469;
 
-            string sonNumara = sonKayit != null ? sonKayit.EvrakNo : "0";
+            var simdi = DateTime.Now;
+            int yil = simdi.Year;
 
-            // Şimdi güvenle integer'a çevirip 1 artırabiliriz
-            int yeniNumara1 = (int.TryParse(sonNumara, out int num) ? num : 0) + 1;
+            var sonKayitBuYil = _db.IsEmirleris
+            .Where(x => x.Tarih.Year == yil)
+            .OrderByDescending(x => x.Id)
+            .FirstOrDefault();
 
-            
+            int currentCounter;
 
-            var Tarih = DateTime.Now;
+            if (sonKayitBuYil != null )
+            {
+                // Örn: "001469-00" → "001469"
+                string sonEvrakNo = sonKayitBuYil.EvrakNo ?? "0";
+                string basePart = sonEvrakNo.Contains('-')
+                    ? sonEvrakNo.Split('-')[0]
+                    : sonEvrakNo;
+
+                if (!int.TryParse(basePart, out currentCounter))
+                {
+                    // Parse edemezsek yıl başlangıcından devam edelim
+                    currentCounter = YilBaslangicKodu - 1;
+                }
+            }
+            else
+            {
+                // Bu yıl için daha hiç kayıt açılmamış → başlangıç kodu
+                // Döngü içinde ++ yapacağımız için -1 veriyoruz
+                currentCounter = YilBaslangicKodu - 1;
+            }
+
+            //var sonKayit = _db.IsEmirleris
+            //    .OrderByDescending(x => x.EvrakNo.Length) // 1. Kural: Uzun olan büyüktür (10 > 9)
+            //    .ThenByDescending(x => x.EvrakNo)       // 2. Kural: Uzunluk aynıysa değere bak (11 > 10)
+            //    .FirstOrDefault();
+
+            //string sonNumara = sonKayit != null ? sonKayit.EvrakNo : "0";
+
+            //// Şimdi güvenle integer'a çevirip 1 artırabiliriz
+            //int yeniNumara1 = (int.TryParse(sonNumara, out int num) ? num : 0) + 1;
+
+
+
+            var Tarih = simdi;
 
             foreach (var item in liste)
             {
@@ -137,6 +170,19 @@ namespace erpv01.Controllers
                     continue;
                 }
 
+                // 2) Stok kartından OzelKod05 = YY kısmı
+                var stok = _db.Stoklars
+                    .FirstOrDefault(s => s.Kod == item.StokKodu);
+
+                if (stok == null)
+                {
+                    Console.WriteLine($"❌ {item.StokKodu} stok kodu bulunamadı — atlanıyor.");
+                    continue;
+                }
+
+                string yyKodu = (stok.OzelKod05 ?? "00").Trim();
+
+                // 3) Reçete bilgileri
                 var receteEvrakNo = _db.Recetelers
                     .Where(r => r.StokKod == item.StokKodu)
                     .Select(r => r.EvrakNo)
@@ -174,17 +220,23 @@ namespace erpv01.Controllers
                 
 
 
-
-
-
-
                 // İç döngü
                 for (int i = 1; i <= adet; i++)
                 {
 
+                    // Sayaç +1 → NNNNN kısmı
+                    currentCounter++;
+
+                    // İlk 5 haneyi 00001 formatında üret
+                    // Eğer 6 hane istersen: ToString("D6") yap.
+                    string baseText = currentCounter.ToString("D6"); // 00001, 00002...
+
+                    // Son 2 hane = stok.OzelKod05 (YY)
+                    string evrakNo = $"{baseText}-{yyKodu}";         // Örn: 01469-00
+
                     var model1 = new IsEmirleri
                     {
-                        EvrakNo = yeniNumara1.ToString(),
+                        EvrakNo = evrakNo,
                         StokKod =  item.StokKodu ,
                         StokBirim = item.Birim,
                         UretimPlani = "P1",
@@ -210,7 +262,7 @@ namespace erpv01.Controllers
                     {
                         var model2 = new IsEmriKalemleri
                         {
-                            EvrakNo = yeniNumara1.ToString(),
+                            EvrakNo = evrakNo,
                             KalemKodu = kksayac,
                             SiraNumarasi = kksayac ,
                             KaynakTipi = rk.KaynakTipi,
@@ -229,7 +281,7 @@ namespace erpv01.Controllers
                     }
 
 
-                    yeniNumara1++;
+                    //yeniNumara1++;
 
                 }
             }

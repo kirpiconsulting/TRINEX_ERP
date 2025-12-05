@@ -35,6 +35,12 @@ public partial class ReceteKalemleri
 
     public bool DemontajMi { get; set; }
 
+    public string? Not1 { get; set; }
+
+    public string? Not2 { get; set; }
+
+    public string? Not3 { get; set; }
+
     public string? EkAlan1 { get; set; }
 
     public string? EkAlan2 { get; set; }

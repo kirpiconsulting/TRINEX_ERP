@@ -34,6 +34,8 @@ namespace erpv01.Controllers
             public string CariEvrakNo { get; set; }
             public string CariKalemKodu { get; set; }
             public string StokOzellikler { get; set; }
+            public string SiparisEvrakNo{ get; set; }
+            public string SiparisKalemKodu { get; set; }
         }
 
         // ------------ LİSTE1 -------------
@@ -74,7 +76,9 @@ namespace erpv01.Controllers
                     StokOzellikler = _db.Stoklars
                                         .Where(s => s.Kod == i.StokKod)
                                         .Select(s => s.EkAlan3)
-                                        .FirstOrDefault()
+                                        .FirstOrDefault(),
+                    SiparisEvrakNo = i.CariSiparisEvrakno,
+                    SiparisKalemKodu = i.CariSiparisKalemKodu
                 })
                 .OrderByDescending(x => x.Tarih)
                 .ToList();
@@ -438,6 +442,24 @@ namespace erpv01.Controllers
                         ))
                         .Select(s => s.Ad)
                         .FirstOrDefault(),
+                    stokMarka = _db.Stoklars
+                        .Where(s => s.Kod == (
+                            _db.IsEmirleris
+                                .Where(i => i.EvrakNo == kal.EvrakNo)
+                                .Select(i => i.StokKod)
+                                .FirstOrDefault()
+                        ))
+                        .Select(s => s.OzelKod01)
+                        .FirstOrDefault(),
+                    StokModel = _db.Stoklars
+                        .Where(s => s.Kod == (
+                            _db.IsEmirleris
+                                .Where(i => i.EvrakNo == kal.EvrakNo)
+                                .Select(i => i.StokKod)
+                                .FirstOrDefault()
+                        ))
+                        .Select(s => s.OzelKod03)
+                        .FirstOrDefault(),
                     birim = _db.IsEmirleris
                         .Where(i => i.EvrakNo == kal.EvrakNo)
                         .Select(i => i.StokBirim)
@@ -509,6 +531,24 @@ namespace erpv01.Controllers
                                 .FirstOrDefault()
                         ))
                         .Select(s => s.Ad)
+                        .FirstOrDefault(),
+                    stokMarka = _db.Stoklars
+                        .Where(s => s.Kod == (
+                            _db.IsEmirleris
+                                .Where(i => i.EvrakNo == kal.EvrakNo)
+                                .Select(i => i.StokKod)
+                                .FirstOrDefault()
+                        ))
+                        .Select(s => s.OzelKod01)
+                        .FirstOrDefault(),
+                    StokModel = _db.Stoklars
+                        .Where(s => s.Kod == (
+                            _db.IsEmirleris
+                                .Where(i => i.EvrakNo == kal.EvrakNo)
+                                .Select(i => i.StokKod)
+                                .FirstOrDefault()
+                        ))
+                        .Select(s => s.OzelKod03)
                         .FirstOrDefault(),
                     birim = _db.IsEmirleris
                         .Where(i => i.EvrakNo == kal.EvrakNo)
@@ -1030,18 +1070,20 @@ namespace erpv01.Controllers
 
                 var receteKalemleri = (from r in _db.Recetelers
                                        where r.StokKod == kayit.StokKodu // Stok koduna göre reçete bul
+                                    
                                        join kal in _db.ReceteKalemleris on r.EvrakNo equals kal.EvrakNo
-                                       where kal.KaynakTipi == 2 // Sadece hammaddeler
+                                       where kal.KaynakTipi == 2  // Sadece hammaddeler
+                                         && (!string.IsNullOrEmpty(kal.Not1) || !string.IsNullOrEmpty(kal.Not2))   // <-- EKLEDİK
                                        join hammadde in _db.Stoklars on kal.KaynakKod equals hammadde.Kod into hamGroup
                                        from hammadde in hamGroup.DefaultIfEmpty()
                                        orderby kal.SiraNumarasi
                                        select new ReceteKalemModel
                                        {
                                            HammaddeKodu = kal.KaynakKod,
-                                           HammaddeAdi = hammadde != null ? hammadde.Ad : "TANIMSIZ",
+                                           HammaddeAdi = kal.Not1 != null ? hammadde.Ad : "TANIMSIZ",
                                            Renk = "BEYAZ",      // SQL'de sabit 'BEYAZ' demiştin (Dinamikse hammadde.Renk yapabiliriz)
-                                           Kalinlik = "8mm",    // SQL'de sabit '8mm' demiştin
-                                           YerliIthal = "YERLİ", // SQL'de sabit 'YERLİ' demiştin
+                                           Kalinlik = hammadde != null ? hammadde.Yukseklik.Value.ToString("0.00") : "",    // SQL'de sabit '8mm' demiştin
+                                           YerliIthal = kal.Not2, // SQL'de sabit 'YERLİ' demiştin
                                            Aciklama = "",
                                            Kontrol = ""
                                        }).ToList();

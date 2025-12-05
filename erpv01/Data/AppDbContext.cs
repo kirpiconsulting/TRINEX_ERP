@@ -76,7 +76,7 @@ public partial class AppDbContext : DbContext
 
 //    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 //#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-//        => optionsBuilder.UseSqlServer("Server=DESKTOP-FRMT5TL\\SQLEX22,1433;Database=DB_BARTEZ;User Id=sa;Password=123;TrustServerCertificate=True;MultipleActiveResultSets=true");
+//        => optionsBuilder.UseSqlServer("Server=DESKTOP-FRMT5TL\\\\\\\\SQLEX22,1433;Database=DB_BARTEZ;User Id=sa;Password=123;TrustServerCertificate=True;MultipleActiveResultSets=true");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -653,6 +653,15 @@ public partial class AppDbContext : DbContext
             entity.Property(e => e.KullanimMiktar)
                 .HasColumnType("decimal(18, 6)")
                 .HasColumnName("kullanim_miktar");
+            entity.Property(e => e.Not1)
+                .HasMaxLength(250)
+                .HasColumnName("not_1");
+            entity.Property(e => e.Not2)
+                .HasMaxLength(250)
+                .HasColumnName("not_2");
+            entity.Property(e => e.Not3)
+                .HasMaxLength(250)
+                .HasColumnName("not_3");
             entity.Property(e => e.Notlar)
                 .HasMaxLength(250)
                 .HasColumnName("notlar");

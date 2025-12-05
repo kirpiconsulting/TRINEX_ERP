@@ -13,10 +13,10 @@ namespace erpv01.Documents
         // =================================================================================
         // AYARLAR (Yükseklikler)
         // =================================================================================
-        private static readonly float H1_Header = 45f;
-        private static readonly float H2_Bilgi = 140f;
-        private static readonly float H3_Govde = 285f;
-        private static readonly float H4_Footer = 95f;
+        private static readonly float H1_Header = 40f;
+        private static readonly float H2_Bilgi = 135f;
+        private static readonly float H3_Govde = 280f;
+        private static readonly float H4_Footer = 90f;
 
         // =================================================================================
         // ANA METOT
@@ -92,11 +92,11 @@ namespace erpv01.Documents
         {
             col.Item().Table(table =>
             {
-                table.ColumnsDefinition(c => { c.RelativeColumn(); c.RelativeColumn(); c.RelativeColumn(); c.RelativeColumn(); c.RelativeColumn(); });
+                table.ColumnsDefinition(c => { c.RelativeColumn(1.2f); c.RelativeColumn(1.2f); c.RelativeColumn(1.2f); c.RelativeColumn(1.2f); c.RelativeColumn(1.2f); });
 
                 // 1. Müşteri
-                table.Cell().Height(H2_Bilgi).Element(Stil_UstCizgisiz).Padding(2).Table(miniTable => {
-                    miniTable.ColumnsDefinition(mc => { mc.ConstantColumn(75); mc.RelativeColumn(); });
+                table.Cell().Height(H2_Bilgi).Element(Stil_UstCizgisiz).Padding(1).Table(miniTable => {
+                    miniTable.ColumnsDefinition(mc => { mc.ConstantColumn(100); mc.RelativeColumn(); });
                     YazMiniSatir(miniTable, "MÜŞTERİ", veri.Musteri);
                     YazMiniSatir(miniTable, "ÜLKE", veri.Ulke);
                     YazMiniSatir(miniTable, "MARKA", veri.Marka);
@@ -110,46 +110,33 @@ namespace erpv01.Documents
 
                 // 2. Özellikler
                 table.Cell().Height(H2_Bilgi).Element(Stil_UstCizgisiz).Padding(2).Table(miniTable => {
-                    miniTable.ColumnsDefinition(mc => { mc.ConstantColumn(75); mc.RelativeColumn(); });
+                    miniTable.ColumnsDefinition(mc => { mc.ConstantColumn(100); mc.RelativeColumn(); });
                     YazMiniSatir(miniTable, "RENK", veri.Renk);
                     YazMiniSatir(miniTable, "LOGO", veri.Logo);
                     YazMiniSatir(miniTable, "FORM TİPİ", veri.FormTipi);
                     YazMiniSatir(miniTable, "TRİM", veri.Trim);
                     YazMiniSatir(miniTable, "OFFSET", veri.Offset);
                     YazMiniSatir(miniTable, "KUŞAK", veri.Kusak);
-                    YazMiniSatir(miniTable, "GUNPORT", veri.Gunport);
-                    YazMiniSatir(miniTable, "DELİK ÇAPI", veri.DelikCapi);
+                    YazMiniSatir(miniTable, "GUNPORT DELİĞİ", veri.Gunport);
+                    YazMiniSatir(miniTable, "SERİGRAFİ", veri.Serigrafi);
                     YazMiniSatir(miniTable, "PAKET YÜZEYİ", veri.PaketYuzeyi);
                 });
 
                 // 3. Serigrafi
                 table.Cell().Height(H2_Bilgi).Element(Stil_UstCizgisiz).Padding(2).Table(miniTable => {
-                    miniTable.ColumnsDefinition(mc => { mc.ConstantColumn(85); mc.RelativeColumn(); });
-                    YazMiniSatir(miniTable, "SERİGRAFİ", veri.Serigrafi);
-                    YazMiniSatir(miniTable, "AYNA BOŞLUĞU", veri.AynaBoslugu);
-                    YazMiniSatir(miniTable, "VIN KUTUSU", veri.VinKutusu);
-                    YazMiniSatir(miniTable, "YAĞMUR SENSÖRÜ", veri.YagmurSensoru);
-                    YazMiniSatir(miniTable, "GÜMÜŞ BOYA", veri.GumusBoya);
-                    YazMiniSatir(miniTable, "ANTEN", veri.Anten);
-                    YazMiniSatir(miniTable, "BOYALI CAM RO", veri.BoyaliCamRo);
-                    YazMiniSatir(miniTable, "NOKTA", veri.Nokta);
-                });
+                    miniTable.ColumnsDefinition(mc => { mc.ConstantColumn(100); mc.RelativeColumn(); });
 
-                // 4. Ürün Detay
-                table.Cell().Height(H2_Bilgi).Element(Stil_UstCizgisiz).Padding(2).Table(miniTable => {
-                    miniTable.ColumnsDefinition(mc => { mc.ConstantColumn(85); mc.RelativeColumn(); });
                     YazMiniSatir(miniTable, "ÜRÜN NO", veri.Urunno);
                     YazMiniSatir(miniTable, "ÇELİK", veri.Celik);
                     YazMiniSatir(miniTable, "PAH (CHAFLAN)", veri.Pah);
-                    YazMiniSatir(miniTable, "DIŞ OFFSET", veri.DisOffset);
-                    YazMiniSatir(miniTable, "SOLAR KONTROL", veri.SolarKontrol);
-                    YazMiniSatir(miniTable, "BAĞLANTI KABLOSU", veri.BaglantiKablosu);
-                    YazMiniSatir(miniTable, "MONTAJ AÇISI", veri.MontajAcisi);
+                    YazMiniSatir(miniTable, "GÜMÜŞ BOYA", veri.GumusBoya);
+                    YazMiniSatir(miniTable, "BOYALI CAM RO", veri.BoyaliCamRo);
+                    YazMiniSatir(miniTable, "TRAM", veri.Nokta);
                 });
 
                 // 5. Sipariş
                 table.Cell().Height(H2_Bilgi).Element(Stil_UstCizgisiz).Padding(2).Table(miniTable => {
-                    miniTable.ColumnsDefinition(mc => { mc.ConstantColumn(95); mc.RelativeColumn(); });
+                    miniTable.ColumnsDefinition(mc => { mc.ConstantColumn(100); mc.RelativeColumn(); });
                     YazMiniSatir(miniTable, "SİPARİŞ NO", veri.SiparisNo);
                     YazMiniSatir(miniTable, "SİPARİŞ TİPİ", veri.SiparisTipi);
                     YazMiniSatir(miniTable, "SİPARİŞ TARİHİ", veri.SiparisTarihi);
@@ -200,10 +187,10 @@ namespace erpv01.Documents
                         t.Cell().RowSpan(2).Height(hKalan).BorderColor(Colors.Black);
                         t.Cell().RowSpan(2).Height(hKalan).BorderRight(0.5f).BorderColor(Colors.Black);
 
-                        t.Cell().Height(hSatir).BorderRight(0.5f).BorderBottom(0.5f).BorderColor(Colors.Black).AlignCenter().AlignTop().Padding(2).Text("ÜRÜN DİZAYN/FORMASYON").FontSize(6);
-                        t.Cell().Height(hSatir).BorderBottom(0.5f).BorderColor(Colors.Black).AlignCenter().AlignTop().Padding(2).Text("ÜRETİM MÜDÜRÜ").FontSize(6);
-                        t.Cell().Height(hSatir).BorderRight(0.5f).BorderColor(Colors.Black).AlignCenter().AlignTop().Padding(2).Text("KALİTE").FontSize(6);
-                        t.Cell().Height(hSatir).AlignCenter().AlignTop().Padding(2).Text("GENEL MÜDÜR").FontSize(6);
+                        //t.Cell().Height(hSatir).BorderRight(0.5f).BorderBottom(0.5f).BorderColor(Colors.Black).AlignCenter().AlignTop().Padding(2).Text("ÜRÜN DİZAYN/FORMASYON").FontSize(6);
+                        //t.Cell().Height(hSatir).BorderBottom(0.5f).BorderColor(Colors.Black).AlignCenter().AlignTop().Padding(2).Text("ÜRETİM MÜDÜRÜ").FontSize(6);
+                        //t.Cell().Height(hSatir).BorderRight(0.5f).BorderColor(Colors.Black).AlignCenter().AlignTop().Padding(2).Text("KALİTE").FontSize(6);
+                        //t.Cell().Height(hSatir).AlignCenter().AlignTop().Padding(2).Text("GENEL MÜDÜR").FontSize(6);
                     });
                 });
 
@@ -219,18 +206,18 @@ namespace erpv01.Documents
                             cols.RelativeColumn(3.5f);    // HAM. KODU
                             cols.RelativeColumn(5f);      // HAM. ADI
                             cols.RelativeColumn(1.5f);    // RENK
-                            cols.RelativeColumn(1.5f);    // KALINLIK
+                            cols.RelativeColumn(2f);    // KALINLIK
                             cols.RelativeColumn(2f);      // YERLİ/İTHAL (Birleşti)
-                            cols.RelativeColumn(1.5f);    // AÇIKLAMA
-                            cols.RelativeColumn(1.5f);    // KONTROL
+                            cols.RelativeColumn(2f);    // AÇIKLAMA
+                            cols.RelativeColumn(2f);    // KONTROL
                         });
 
                         // BAŞLIKLAR
-                        void BaslikYaz(string txt) => t.Cell().Border(0.5f).BorderColor(Colors.Grey.Lighten2).Padding(2).AlignCenter().AlignMiddle().Text(txt).Bold().FontSize(6);
+                        void BaslikYaz(string txt) => t.Cell().Border(0.5f).BorderColor(Colors.Grey.Lighten2).Padding(1).AlignCenter().AlignMiddle().Text(txt).Bold().FontSize(6);
 
                         BaslikYaz("SIRA");
-                        BaslikYaz("HAM. KODU");
-                        BaslikYaz("HAM. ADI");
+                        BaslikYaz("HAMMADDE KODU");
+                        BaslikYaz("HAMMADDE ADI");
                         BaslikYaz("RENK");
                         BaslikYaz("KALINLIK");
                         BaslikYaz("YERLİ/İTHAL"); // <-- TEK SÜTUN
@@ -244,7 +231,7 @@ namespace erpv01.Documents
                         for (int k = 0; k < toplamSatir; k++)
                         {
                             // Yardımcı fonksiyon
-                            void VeriYaz(string txt) => t.Cell().BorderBottom(0.5f).BorderColor(Colors.Grey.Lighten3).Padding(2).AlignCenter().AlignMiddle().Text(txt).FontSize(6);
+                            void VeriYaz(string txt) => t.Cell().BorderBottom(0.5f).BorderColor(Colors.Grey.Lighten3).Padding(1).AlignCenter().AlignMiddle().Text(txt).FontSize(6);
 
                             if (k < liste.Count)
                             {
@@ -294,36 +281,36 @@ namespace erpv01.Documents
                 });
 
                 // --- BAŞLIKLAR ---
-                table.Cell().BorderLeft(0.5f).BorderBottom(0.5f).BorderRight(0.5f).BorderColor(Colors.Black).Padding(1).AlignCenter().AlignMiddle().Text("TAKIM ADI").Bold().FontSize(5);
-                table.Cell().BorderBottom(0.5f).BorderRight(0.5f).BorderColor(Colors.Black).Padding(1).AlignCenter().AlignMiddle().Text("YER").Bold().FontSize(5);
-                table.Cell().BorderBottom(0.5f).BorderRight(0.5f).BorderColor(Colors.Black).Padding(1).AlignCenter().AlignMiddle().Text("KOD").Bold().FontSize(5);
+                //table.Cell().BorderLeft(0.5f).BorderBottom(0.5f).BorderRight(0.5f).BorderColor(Colors.Black).Padding(1).AlignCenter().AlignMiddle().Text("TAKIM ADI").Bold().FontSize(5);
+                //table.Cell().BorderBottom(0.5f).BorderRight(0.5f).BorderColor(Colors.Black).Padding(1).AlignCenter().AlignMiddle().Text("YER").Bold().FontSize(5);
+                //table.Cell().BorderBottom(0.5f).BorderRight(0.5f).BorderColor(Colors.Black).Padding(1).AlignCenter().AlignMiddle().Text("KOD").Bold().FontSize(5);
 
-                table.Cell().BorderBottom(0.5f).BorderRight(0.5f).BorderColor(Colors.Black).Padding(1).AlignCenter().AlignMiddle().Text("TAKIM ADI").Bold().FontSize(5);
-                table.Cell().BorderBottom(0.5f).BorderRight(0.5f).BorderColor(Colors.Black).Padding(1).AlignCenter().AlignMiddle().Text("YER").Bold().FontSize(5);
-                table.Cell().BorderBottom(0.5f).BorderRight(0.5f).BorderColor(Colors.Black).Padding(1).AlignCenter().AlignMiddle().Text("KOD").Bold().FontSize(5);
+                //table.Cell().BorderBottom(0.5f).BorderRight(0.5f).BorderColor(Colors.Black).Padding(1).AlignCenter().AlignMiddle().Text("TAKIM ADI").Bold().FontSize(5);
+                //table.Cell().BorderBottom(0.5f).BorderRight(0.5f).BorderColor(Colors.Black).Padding(1).AlignCenter().AlignMiddle().Text("YER").Bold().FontSize(5);
+                //table.Cell().BorderBottom(0.5f).BorderRight(0.5f).BorderColor(Colors.Black).Padding(1).AlignCenter().AlignMiddle().Text("KOD").Bold().FontSize(5);
 
                 table.Cell().BorderBottom(0.5f).BorderRight(0.5f).BorderColor(Colors.Black).Padding(1).AlignCenter().AlignMiddle().Text("AÇIKLAMA").Bold().FontSize(5);
 
-                // Sağ tarafa BorderRight eklendi
-                table.Cell().BorderBottom(0.5f).BorderRight(0.5f).BorderColor(Colors.Black).Padding(1).AlignCenter().AlignMiddle().Text("GENEL TOLERANS").Bold().FontSize(5);
+                //// Sağ tarafa BorderRight eklendi
+                //table.Cell().BorderBottom(0.5f).BorderRight(0.5f).BorderColor(Colors.Black).Padding(1).AlignCenter().AlignMiddle().Text("GENEL TOLERANS").Bold().FontSize(5);
 
                 // --- VERİLER ---
-                string[] solListe = { "ORJİNAL RESİM", "TEKNİK RESİM", "KESME ŞABLONU", "OFFSET ŞABLONU", "ÇELİK ŞABLON", "SERİGRAFİ KULLANIMI" };
-                string[] sagListe = { "ANTEN FİLMİ", "SERİGRAFİ KALIBI", "ANTEN KALIBI", "KAVİSLEME KALIBI", "KAVİS KONTROL ŞABLON", "" };
+                //string[] solListe = { "ORJİNAL RESİM", "TEKNİK RESİM", "KESME ŞABLONU", "OFFSET ŞABLONU", "ÇELİK ŞABLON", "SERİGRAFİ KULLANIMI" };
+                //string[] sagListe = { "ANTEN FİLMİ", "SERİGRAFİ KALIBI", "ANTEN KALIBI", "KAVİSLEME KALIBI", "KAVİS KONTROL ŞABLON", "" };
 
                 // 6 SATIR DÖNÜYORUZ
                 for (int i = 0; i < 6; i++)
                 {
                     // 1. Grup (Sol)
-                    table.Cell().BorderLeft(0.5f).BorderBottom(0.5f).BorderRight(0.5f).BorderColor(Colors.Black).Padding(1).Text(solListe[i]).FontSize(4.5f);
-                    table.Cell().BorderBottom(0.5f).BorderRight(0.5f).BorderColor(Colors.Black).Padding(1).Text("");
-                    table.Cell().BorderBottom(0.5f).BorderRight(0.5f).BorderColor(Colors.Black).Padding(1).Text("");
+                    //table.Cell().BorderLeft(0.5f).BorderBottom(0.5f).BorderRight(0.5f).BorderColor(Colors.Black).Padding(1).Text(solListe[i]).FontSize(4.5f);
+                    //table.Cell().BorderBottom(0.5f).BorderRight(0.5f).BorderColor(Colors.Black).Padding(1).Text("");
+                    //table.Cell().BorderBottom(0.5f).BorderRight(0.5f).BorderColor(Colors.Black).Padding(1).Text("");
 
-                    // 2. Grup (Sağ)
-                    string sagYazi = !string.IsNullOrEmpty(sagListe[i]) ? sagListe[i] : "";
-                    table.Cell().BorderBottom(0.5f).BorderRight(0.5f).BorderColor(Colors.Black).Padding(1).Text(sagYazi).FontSize(4.5f);
-                    table.Cell().BorderBottom(0.5f).BorderRight(0.5f).BorderColor(Colors.Black).Padding(1).Text("");
-                    table.Cell().BorderBottom(0.5f).BorderRight(0.5f).BorderColor(Colors.Black).Padding(1).Text("");
+                    //// 2. Grup (Sağ)
+                    //string sagYazi = !string.IsNullOrEmpty(sagListe[i]) ? sagListe[i] : "";
+                    //table.Cell().BorderBottom(0.5f).BorderRight(0.5f).BorderColor(Colors.Black).Padding(1).Text(sagYazi).FontSize(4.5f);
+                    //table.Cell().BorderBottom(0.5f).BorderRight(0.5f).BorderColor(Colors.Black).Padding(1).Text("");
+                    //table.Cell().BorderBottom(0.5f).BorderRight(0.5f).BorderColor(Colors.Black).Padding(1).Text("");
 
                     // 3. Açıklama (SÜTUN 7)
                     if (i == 0)
