@@ -46,6 +46,10 @@ def run_table_sync():
         ozelkod4 = str(d["ozel_kod4_aciklama"])
         ozelkod5 = str(d["ozel_kod5_aciklama"])
 
+        en = str(d["en"])
+        boy = str(d["boy"])
+        yukseklik = str(d["yukseklik"])
+        agirlik = str(d["agirlik"])
         
 
         if ek in mevcutlar:
@@ -64,12 +68,17 @@ def run_table_sync():
                     ozel_kod02=?,
                     ozel_kod03=?,
                     ozel_kod04=?,
-                    ozel_kod05=?
+                    ozel_kod05=?,
+                    en=?,
+                    boy=?,
+                    yukseklik=?,
+                    agirlik=?
                 WHERE ek_alan_1=?
             """, (
                 kod, ad, aktif, suan, anabirim,
                 ek2, ek3, ek4,
                 ozelkod1, ozelkod2, ozelkod3, ozelkod4, ozelkod5,
+                en,boy,yukseklik,agirlik,
                 ek
             ))
         else:
@@ -78,15 +87,15 @@ def run_table_sync():
                     ek_alan_1, kod, ad, aktif_mi,
                     olusturma_tarihi, olusturan_kullanici,
                     ana_birim, ek_alan_2, ek_alan_3, ek_alan_4,
-                    ozel_kod01, ozel_kod02, ozel_kod03, ozel_kod04, ozel_kod05
+                    ozel_kod01, ozel_kod02, ozel_kod03, ozel_kod04, ozel_kod05, en, boy, yukseklik, agirlik
                 ) VALUES (
                     ?, ?, ?, ?, ?, 'ENTEGRASYON_01',
-                    ?, ?, ?, ?, ?, ?, ?, ?, ?
+                    ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
                 )
             """, (
                 ek, kod, ad, aktif, suan,
                 anabirim, ek2, ek3, ek4,
-                ozelkod1, ozelkod2, ozelkod3, ozelkod4, ozelkod5
+                ozelkod1, ozelkod2, ozelkod3, ozelkod4, ozelkod5, en,boy,yukseklik,agirlik
             ))
 
     for ek in mevcutlar:

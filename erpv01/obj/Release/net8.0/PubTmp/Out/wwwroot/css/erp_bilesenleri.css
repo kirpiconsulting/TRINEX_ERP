@@ -1,0 +1,145 @@
+﻿/* =========================================================
+   1. STANDART ERP BUTONLARI (SİYAH/BEYAZ/GRİ TEMA)
+   ========================================================= */
+
+.btn-erp-base {
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+    color: #333;
+    padding: 6px 14px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+    margin-left: 5px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    cursor: pointer;
+    text-decoration: none;
+}
+
+    .btn-erp-base:hover {
+        background-color: #f8f9fa;
+        border-color: #adb5bd;
+        color: #000;
+        transform: translateY(-1px);
+        box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+    }
+
+    .btn-erp-base:active {
+        transform: translateY(0);
+        background-color: #e9ecef;
+    }
+
+/* İkonlu (Yazısız) Butonlar */
+.btn-erp-icon-only {
+    padding: 6px 10px;
+    justify-content: center;
+    color: #555;
+}
+
+    .btn-erp-icon-only:hover {
+        color: #0d6efd;
+    }
+
+/* Temizle Butonu (Hover'da Kırmızı) */
+.btn-erp-clean:hover {
+    color: #dc3545;
+    border-color: #dc3545;
+}
+
+/* =========================================================
+   2. TOOLBAR & DROPDOWN YAPISI
+   ========================================================= */
+
+.grid-tools-wrapper {
+    margin-bottom: 8px;
+    padding-right: 2px;
+}
+
+    .grid-tools-wrapper .dropdown-menu {
+        margin-top: 10px !important;
+        border-radius: 8px;
+        border: 1px solid #dee2e6;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.15) !important;
+        top: 100% !important;
+    }
+
+/* Mobil Toolbar Gizleme */
+.erp-toolbar-mobile {
+    display: none !important;
+}
+
+@media (max-width: 768px) {
+    .erp-toolbar-desktop {
+        display: none !important;
+    }
+
+    .erp-toolbar-mobile {
+        display: block !important;
+        width: 100%;
+    }
+
+        .erp-toolbar-mobile .dropdown-toggle {
+            width: 100%;
+            justify-content: center;
+            background-color: #333;
+            color: #fff;
+        }
+}
+
+/* =========================================================
+   3. TOAST UI GRID STİLİ (SADE VE BOLD BAŞLIK)
+   ========================================================= */
+
+/* Grid Genel */
+.tui-grid-container {
+    font-family: 'Inter', sans-serif !important;
+    font-size: 13px !important;
+    border: 1px solid #dee2e6 !important;
+    border-radius: 4px;
+    background-color: #fff;
+}
+
+/* Hücreler */
+.tui-grid-cell {
+    font-weight: 400 !important;
+    color: #212529 !important;
+    background-color: #fff !important;
+    border-color: #e9ecef !important;
+    padding: 5px 10px !important;
+}
+
+/* --- HEADER (BAŞLIK) --- */
+.tui-grid-head-area .tui-grid-cell {
+    background-color: #f8f9fa !important;
+    color: #212529 !important;
+    font-weight: 700 !important; /* DEDEM İSTEDİĞİN GİBİ BOLD */
+    border-color: #dee2e6 !important;
+}
+
+/* Seçim Rengi */
+.tui-grid-layer-selection {
+    background-color: rgba(13, 110, 253, 0.08) !important;
+    border: 1px solid #0d6efd !important;
+}
+
+/* Sürükleme için yazı seçimini kapat */
+.tui-grid-head-area {
+    user-select: none !important;
+}
+
+    .tui-grid-head-area .tui-grid-cell {
+        cursor: grab !important;
+    }
+
+        .tui-grid-head-area .tui-grid-cell:active {
+            cursor: grabbing !important;
+        }
+
+/* Filtre ikonları tıklanabilir kalsın */
+.tui-grid-btn-filter, .tui-grid-btn-sorting {
+    cursor: pointer !important;
+}

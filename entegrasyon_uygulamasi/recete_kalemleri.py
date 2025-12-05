@@ -39,6 +39,8 @@ def run_table_sync():
         ek_alan_2 = d["tuketim_tezgah"]
         ek_alan_3 = d["tuketim_depo"]
         operasyon_kod = d["operasyon_kod"]
+        not1= d["not1"]
+        not2=d["not2"]
         suan = datetime.now()
         
         raw_miktar = str(d["kullanim_miktar"] if d["kullanim_miktar"] is not None else "0")
@@ -61,23 +63,25 @@ def run_table_sync():
                     ek_alan_3=?,
                     operasyon_kod=?,
                     guncelleme_tarihi=?,
-                    guncelleyen_kullanici='ENTEGRASYON_01'
+                    guncelleyen_kullanici='ENTEGRASYON_01',
+                    not_1=?,
+                    not_2=?
                 WHERE kalem_kodu=?
             """,
             evrak_no, sira_numarasi, kaynak_tipi, kaynak_kod,
             kullanim_miktar, ek_alan_2, ek_alan_3, operasyon_kod,
-            suan, kalem_kodu)
+            suan,not1,not2, kalem_kodu)
         else:
             cur.execute("""
                     INSERT INTO recete_kalemleri
                     (kalem_kodu, evrak_no, sira_numarasi, kaynak_tipi, kaynak_kod,
                     kullanim_miktar, ek_alan_2, ek_alan_3, operasyon_kod,
-                    olusturma_tarihi, olusturan_kullanici)
-                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'ENTEGRASYON_01')
+                    olusturma_tarihi, olusturan_kullanici,not_1,not_2)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'ENTEGRASYON_01',?,?)
                 """,
                 kalem_kodu, evrak_no, sira_numarasi, kaynak_tipi, kaynak_kod,
                 kullanim_miktar, ek_alan_2, ek_alan_3, operasyon_kod,
-                suan)
+                suan,not1,not2)
 
     for kalem_kodu in mevcutlar:
         if kalem_kodu not in keys:
