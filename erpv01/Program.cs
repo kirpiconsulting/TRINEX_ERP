@@ -11,13 +11,13 @@ namespace erpv01
             var builder = WebApplication.CreateBuilder(args);
 
             builder.Services.AddAuthentication("TrinexCookieAuth")
-    .AddCookie("TrinexCookieAuth", options =>
-    {
-        options.Cookie.Name = "TrinexERP.Auth";
-        options.LoginPath = "/Account/Login"; // Giriþ yapýlmamýþsa buraya atar
-        options.AccessDeniedPath = "/Account/AccessDenied"; // Yetkisiz giriþ
-        options.ExpireTimeSpan = TimeSpan.FromMinutes(60); // Oturum süresi
-    });
+        .AddCookie("TrinexCookieAuth", options =>
+        {
+            options.Cookie.Name = "TrinexERP.Auth";
+            options.LoginPath = "/Account/Login"; // Giriþ yapýlmamýþsa buraya atar
+            options.AccessDeniedPath = "/Account/AccessDenied"; // Yetkisiz giriþ
+            options.ExpireTimeSpan = TimeSpan.FromMinutes(60); // Oturum süresi
+        });
 
 
             QuestPDF.Settings.License = LicenseType.Community;

@@ -3,6 +3,7 @@ using erpv01.Models.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Diagnostics;
 
 namespace erpv01.Controllers
 {
@@ -113,102 +114,76 @@ namespace erpv01.Controllers
                 return Json(new { success = false, message = "Gönderilen veri yok!" });
 
             const int YilBaslangicKodu = 1469;
-
             var simdi = DateTime.Now;
             int yil = simdi.Year;
 
+            var errors = new List<string>();   // <- Hatalar buraya dolacak
+
+            // --- Sayaç Hesaplama ---
             var sonKayitBuYil = _db.IsEmirleris
-            .Where(x => x.Tarih.Year == yil)
-            .OrderByDescending(x => x.Id)
-            .FirstOrDefault();
+                .Where(x => x.Tarih.Year == yil)
+                .OrderByDescending(x => x.Id)
+                .FirstOrDefault();
 
             int currentCounter;
 
-            if (sonKayitBuYil != null )
+            if (sonKayitBuYil != null)
             {
-                // Örn: "001469-00" → "001469"
                 string sonEvrakNo = sonKayitBuYil.EvrakNo ?? "0";
                 string basePart = sonEvrakNo.Contains('-')
                     ? sonEvrakNo.Split('-')[0]
                     : sonEvrakNo;
 
                 if (!int.TryParse(basePart, out currentCounter))
-                {
-                    // Parse edemezsek yıl başlangıcından devam edelim
                     currentCounter = YilBaslangicKodu - 1;
-                }
             }
             else
             {
-                // Bu yıl için daha hiç kayıt açılmamış → başlangıç kodu
-                // Döngü içinde ++ yapacağımız için -1 veriyoruz
                 currentCounter = YilBaslangicKodu - 1;
             }
 
-            //var sonKayit = _db.IsEmirleris
-            //    .OrderByDescending(x => x.EvrakNo.Length) // 1. Kural: Uzun olan büyüktür (10 > 9)
-            //    .ThenByDescending(x => x.EvrakNo)       // 2. Kural: Uzunluk aynıysa değere bak (11 > 10)
-            //    .FirstOrDefault();
-
-            //string sonNumara = sonKayit != null ? sonKayit.EvrakNo : "0";
-
-            //// Şimdi güvenle integer'a çevirip 1 artırabiliriz
-            //int yeniNumara1 = (int.TryParse(sonNumara, out int num) ? num : 0) + 1;
-
-
-
-            var Tarih = simdi;
-
+            // --- Tüm satırları tek tek dön ---
             foreach (var item in liste)
             {
-                // İş emri miktarı örn: 5
                 int adet = (int)item.IsEmriMiktar;
 
+                // İş emri miktarı kontrolü
                 if (adet <= 0)
                 {
-                    Console.WriteLine($"❌ {item.EvrakNo} / {item.KalemKodu} için geçersiz iş emri miktarı!");
-                    continue;
+                    errors.Add($"{item.StokKodu}: İş emri miktarı 0 olamaz.");
+                    continue;   // diğer satırlara devam
                 }
 
-                // 2) Stok kartından OzelKod05 = YY kısmı
-                var stok = _db.Stoklars
-                    .FirstOrDefault(s => s.Kod == item.StokKodu);
-
+                // Stok kontrolü
+                var stok = _db.Stoklars.FirstOrDefault(s => s.Kod == item.StokKodu);
                 if (stok == null)
                 {
-                    Console.WriteLine($"❌ {item.StokKodu} stok kodu bulunamadı — atlanıyor.");
+                    errors.Add($"{item.StokKodu}: Stok kartı bulunamadı.");
                     continue;
                 }
 
                 string yyKodu = (stok.OzelKod05 ?? "00").Trim();
 
-                // 3) Reçete bilgileri
+                // Reçete evrak no kontrolü
                 var receteEvrakNo = _db.Recetelers
                     .Where(r => r.StokKod == item.StokKodu)
                     .Select(r => r.EvrakNo)
                     .FirstOrDefault();
+
+                if (string.IsNullOrWhiteSpace(receteEvrakNo))
+                {
+                    errors.Add($"{item.StokKodu}: Reçete bulunamadı.");
+                    continue;
+                }
 
                 var receteMiktar = _db.Recetelers
                     .Where(r => r.StokKod == item.StokKodu)
                     .Select(r => r.StokMiktar)
                     .FirstOrDefault();
 
-
-                var receteEkAlan2 = _db.Recetelers
-                    .Where(r => r.StokKod == item.StokKodu)
-                    .Select(r => r.EkAlan2)
-                    .FirstOrDefault();
-
                 if (receteMiktar <= 0)
                 {
-                    Console.WriteLine($"❌ Reçete miktarı 0");
-                    continue;
-                }
-
-
-                if (string.IsNullOrWhiteSpace(receteEvrakNo))
-                {
-                    Console.WriteLine($"❌ {item.StokKodu} stok kodu için reçete bulunamadı — atlanıyor.");
+                    errors.Add($"{item.StokKodu}: Reçete stok miktarı 0.");
                     continue;
                 }
 
@@ -217,27 +192,17 @@ namespace erpv01.Controllers
                     .OrderBy(rk => rk.SiraNumarasi)
                     .ToList();
 
-                
-
-
-                // İç döngü
+                // --- Artık bu satır geçerli → adet kadar iş emri oluştur ---
                 for (int i = 1; i <= adet; i++)
                 {
-
-                    // Sayaç +1 → NNNNN kısmı
                     currentCounter++;
-
-                    // İlk 5 haneyi 00001 formatında üret
-                    // Eğer 6 hane istersen: ToString("D6") yap.
-                    string baseText = currentCounter.ToString("D6"); // 00001, 00002...
-
-                    // Son 2 hane = stok.OzelKod05 (YY)
-                    string evrakNo = $"{baseText}-{yyKodu}";         // Örn: 01469-00
+                    string baseText = currentCounter.ToString("D6");
+                    string evrakNo = $"{baseText}-{yyKodu}";
 
                     var model1 = new IsEmirleri
                     {
                         EvrakNo = evrakNo,
-                        StokKod =  item.StokKodu ,
+                        StokKod = item.StokKodu,
                         StokBirim = item.Birim,
                         UretimPlani = "P1",
                         PlanlananMiktar = 1,
@@ -245,32 +210,28 @@ namespace erpv01.Controllers
                         AcikKapali = "A",
                         CariSiparisEvrakno = item.EvrakNo,
                         CariSiparisKalemKodu = item.KalemKodu,
-                        OlusturmaTarihi = Tarih,
+                        OlusturmaTarihi = simdi,
                         OlusturanKullanici = "ENTEGRASYON_01",
-                        Tarih = Tarih,
+                        Tarih = simdi,
                         Durum = 1,
-                        EkAlan2 = receteEkAlan2,
                         Notlar = item.IsEmriNot
                     };
-
                     _db.IsEmirleris.Add(model1);
 
-
                     int kksayac = 1;
-
                     foreach (var rk in receteKalemleri)
                     {
                         var model2 = new IsEmriKalemleri
                         {
                             EvrakNo = evrakNo,
                             KalemKodu = kksayac,
-                            SiraNumarasi = kksayac ,
+                            SiraNumarasi = kksayac,
                             KaynakTipi = rk.KaynakTipi,
                             KaynakKod = rk.KaynakKod,
                             OperasyonKod = rk.OperasyonKod,
-                            PlanlananMiktar = (rk.KullanimMiktar/receteMiktar)*1,
-                            KalanMiktar = (rk.KullanimMiktar / receteMiktar) * 1,
-                            OlusturmaTarihi = Tarih,
+                            PlanlananMiktar = (rk.KullanimMiktar / receteMiktar),
+                            KalanMiktar = (rk.KullanimMiktar / receteMiktar),
+                            OlusturmaTarihi = simdi,
                             OlusturanKullanici = "ENTEGRASYON_01",
                             EkAlan2 = rk.EkAlan2,
                             EkAlan3 = rk.EkAlan3,
@@ -279,10 +240,6 @@ namespace erpv01.Controllers
                         _db.IsEmriKalemleris.Add(model2);
                         kksayac++;
                     }
-
-
-                    //yeniNumara1++;
-
                 }
             }
 
@@ -293,21 +250,50 @@ namespace erpv01.Controllers
                 return Json(new
                 {
                     success = true,
-                    message = "İş emirleri başarıyla oluşturuldu."
+                    message = "İş emirleri oluşturuldu.",
+                    warnings = errors // <- hata olanlar geri döner
                 });
             }
             catch (Exception ex)
             {
-                // HATAYI LOG'A YAZ
-                Console.WriteLine("❌ HATA: " + ex.Message);
-
                 return Json(new
                 {
                     success = false,
                     message = "Kayıt sırasında hata oluştu: " + ex.Message
                 });
             }
+        }
 
+        [HttpPost]
+        public IActionResult PythonCalistir()
+        {
+            string pythonExe = @"C:\Users\KIRPI\AppData\Local\Programs\Python\Python313\python.exe";
+
+            string scriptPath = Path.Combine(
+                Directory.GetCurrentDirectory(),
+                "App_PythonScripts",
+                "stoklar.py"
+            );
+
+            var psi = new ProcessStartInfo();
+            psi.FileName = pythonExe;
+            psi.Arguments = $"\"{scriptPath}\"";
+            psi.RedirectStandardOutput = true;
+            psi.RedirectStandardError = true;
+            psi.UseShellExecute = false;
+            psi.CreateNoWindow = true;
+
+            var process = Process.Start(psi);
+
+            string output = process.StandardOutput.ReadToEnd();
+            string error = process.StandardError.ReadToEnd();
+
+            process.WaitForExit();
+
+            if (!string.IsNullOrEmpty(error))
+                return Content("HATA: " + error);
+
+            return Content(output);
         }
 
 

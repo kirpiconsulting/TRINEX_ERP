@@ -37,6 +37,13 @@
             <div id="grid" style="height: calc(100vh - 180px); width: 100%;"></div>
         </div>
     </div>
+
+    <!-- BURAYA EKLEYECEKSİN -->
+    <div id="sonuc"
+         class="mt-3 p-2 border rounded bg-light"
+         style="display:none; white-space:pre;">
+    </div>
+
 </div>
 
 
@@ -105,7 +112,10 @@ document.addEventListener("DOMContentLoaded", function () {
     // 1) BUTONLAR (KALDI)
     // ---------------------------
     liste_ekrani_butonlari_olustur("listeToolbar", {
-        fonksiyonlar: [{ ad: "İş Emirlerini Oluştur", action: "is_emirlerini_olustur" }],
+       fonksiyonlar: [
+        { ad: "İş Emirlerini Oluştur", action: "is_emirlerini_olustur" },
+        { ad: "Siparişleri Güncelle", action: "Siparis_Guncelle" }
+    ]
    
     });
 
@@ -222,6 +232,26 @@ function btnKaydetClick() { alert("Kaydet"); }
         modal.show();
     }
 
+  function Siparis_Guncelle() {
+
+       showToast("Python script çalıştırılıyor...", "info");
+
+        fetch('/Satis/PythonCalistir', {
+            method: 'POST'
+        })
+        .then(r => r.text())
+        .then(data => {
+            if (data.startsWith("HATA")) {
+                showToast(data, "error");
+            } else {
+                showToast(data, "success");
+            }
+        })
+        .catch(err => {
+            showToast("Hata: " + err, "error");
+        });
+    }
+
 
     function modal_is_emri_kaydet() {
     const rows = [];
@@ -250,16 +280,26 @@ function btnKaydetClick() { alert("Kaydet"); }
     .then(r => r.json())
     .then(res => {
 
+         let msg = res.message;
+
+        if (res.warnings && res.warnings.length > 0) {
+            msg += "\n\nUYARILAR:\n";   // alt başlık
+
+            res.warnings.forEach(w => {
+                msg += "- " + w + "\n"; // her uyarıyı ekle
+            });
+        }
+
         if (res.success === true) {
             // ✔ önce modalı kapatıyoruz
             const modal = bootstrap.Modal.getInstance(document.getElementById("isEmriModal"));
             modal.hide();
 
             // ✔ sonra başarı toast
-            showToast(res.message, "success");
+            showToast(msg, "success");
         } else {
             // ❌ hata → modal kapanmaz
-            showToast(res.message, "error");
+            showToast(msg, "error");
         }
     })
     .catch(err => {

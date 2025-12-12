@@ -400,6 +400,7 @@ namespace erpv01.Controllers
         [HttpPost]
         public IActionResult BekleyenIsEmirleri([FromBody] BekleyenIsEmriRequest dto)
         {
+            // -------------------------- VALIDASYON --------------------------
             if (dto == null || string.IsNullOrWhiteSpace(dto.OperatorKod))
                 return Json(new { success = false, message = "Operatör bilgisi gelmedi!" });
 
@@ -413,69 +414,52 @@ namespace erpv01.Controllers
             if (tezgahListesi.Count == 0)
                 return Json(new { success = false, message = "Geçerli tezgah bulunamadı!" });
 
-            var liste = (
-                from kal in _db.IsEmriKalemleris
-                where kal.KaynakTipi == 0
-                      && kal.Durum == 2
-                      && tezgahListesi.Contains(kal.KaynakKod)
-                orderby kal.EvrakNo, kal.SiraNumarasi
-                select new
-                {
-                    isEmriNumarasi = kal.EvrakNo,
-                    kalemKodu = kal.KalemKodu,
-                    tezgahKodu = kal.KaynakKod,
-                    tezgahAdi = _db.Tezgahlars
-                        .Where(t => t.Kod == kal.KaynakKod)
-                        .Select(t => t.Ad)
-                        .FirstOrDefault(),
-                    baslangicTarihi = kal.GerceklesenBaslama,
-                    stokKodu = _db.IsEmirleris
-                        .Where(i => i.EvrakNo == kal.EvrakNo)
-                        .Select(i => i.StokKod)
-                        .FirstOrDefault(),
-                    stokAdi = _db.Stoklars
-                        .Where(s => s.Kod == (
-                            _db.IsEmirleris
-                                .Where(i => i.EvrakNo == kal.EvrakNo)
-                                .Select(i => i.StokKod)
-                                .FirstOrDefault()
-                        ))
-                        .Select(s => s.Ad)
-                        .FirstOrDefault(),
-                    stokMarka = _db.Stoklars
-                        .Where(s => s.Kod == (
-                            _db.IsEmirleris
-                                .Where(i => i.EvrakNo == kal.EvrakNo)
-                                .Select(i => i.StokKod)
-                                .FirstOrDefault()
-                        ))
-                        .Select(s => s.OzelKod01)
-                        .FirstOrDefault(),
-                    StokModel = _db.Stoklars
-                        .Where(s => s.Kod == (
-                            _db.IsEmirleris
-                                .Where(i => i.EvrakNo == kal.EvrakNo)
-                                .Select(i => i.StokKod)
-                                .FirstOrDefault()
-                        ))
-                        .Select(s => s.OzelKod03)
-                        .FirstOrDefault(),
-                    birim = _db.IsEmirleris
-                        .Where(i => i.EvrakNo == kal.EvrakNo)
-                        .Select(i => i.StokBirim)
-                        .FirstOrDefault(),
-                    stokOzellikler = _db.Stoklars
-                        .Where(s => s.Kod == (
-                            _db.IsEmirleris
-                                .Where(i => i.EvrakNo == kal.EvrakNo)
-                                .Select(i => i.StokKod)
-                                .FirstOrDefault()
-                        ))
-                        .Select(s => s.EkAlan3)
-                        .FirstOrDefault()
-                }
-            ).ToList();
+            // -------------------------- SORGUNUN TEMİZ HALİ --------------------------
+            var liste =
+                (from kal in _db.IsEmriKalemleris
 
+                     // Durum + Tezgah filtreleri
+                 where kal.KaynakTipi == 0
+                       && kal.Durum == 2
+                       && tezgahListesi.Contains(kal.KaynakKod)
+
+                 // Join: İş Emri başlık
+                 join isEmri in _db.IsEmirleris
+                     on kal.EvrakNo equals isEmri.EvrakNo
+
+                 // Join: Stok kartı
+                 join stok in _db.Stoklars
+                     on isEmri.StokKod equals stok.Kod
+
+                 // Join: Tezgah kartı
+                 join tezgah in _db.Tezgahlars
+                     on kal.KaynakKod equals tezgah.Kod
+
+                 orderby kal.GerceklesenBaslama ?? DateTime.MinValue,
+                  kal.EvrakNo,
+                  kal.SiraNumarasi
+
+                 select new
+                 {
+                     isEmriNumarasi = kal.EvrakNo,
+                     kalemKodu = kal.KalemKodu,
+
+                     tezgahKodu = kal.KaynakKod,
+                     tezgahAdi = tezgah.Ad,
+
+                     baslangicTarihi = kal.GerceklesenBaslama,
+
+                     stokKodu = stok.Kod,
+                     stokAdi = stok.Ad,
+                     stokMarka = stok.OzelKod01,
+                     StokModel = stok.OzelKod03,
+                     stokOzellikler = stok.EkAlan3,
+
+                     birim = isEmri.StokBirim
+                 })
+                .ToList();
+
+            // -------------------------- GERİ DÖNÜŞ --------------------------
             return Json(new { success = true, data = liste });
         }
 
@@ -1003,60 +987,114 @@ namespace erpv01.Controllers
                 return BadRequest("Evrak numarası seçilmedi.");
 
             // 1. Önce İş Emirlerini ve Resimlerini Çekelim
-            var veriListesi = (from ie in _db.IsEmirleris
-                               join st in _db.Stoklars on ie.StokKod equals st.Kod into stGroup
-                               from st in stGroup.DefaultIfEmpty()
-                               where evrakNolari.Contains(ie.EvrakNo)
-                               select new IsEmriPdfModel
-                               {
-                                   EvrakNo = ie.EvrakNo,
-                                   StokKodu = ie.StokKod, // Bunu reçeteyi bulmak için kullanacağız
-                                   ResimUrl = st != null ? st.EkAlan4 : "",
-                                   CamKalinlik = "41.3",
-                                   Isemrinot = ie.Notlar,
-                                   Musteri = "ABDULRAHMAN LİBYA",
-                                   Ulke = "LIBYA",
-                                   Marka = "Toyota",
-                                   Model = "UZJ 76",
-                                   Yil = "2015",
-                                   UrunAdi = "TLC 76 ARKA CAM 155 LY03",
-                                   Seviye = "BR6/41",
-                                   Olcu = "1178x325",
-                                   Alan = "0.38",
-                                   Renk = "CLEAR",
-                                   Logo = "YOK",
-                                   FormTipi = "DÜZ",
-                                   Trim = "YOK",
-                                   Offset = "VAR",
-                                   Kusak = "YOK",
-                                   Gunport = "155",
-                                   DelikCapi = "155",
-                                   PaketYuzeyi = "TECOFLEX",
-                                   Serigrafi = "DG BOYA",
-                                   AynaBoslugu = "YOK",
-                                   VinKutusu = "YOK",
-                                   YagmurSensoru = "YOK",
-                                   GumusBoya = "YOK",
-                                   Anten = "YOK",
-                                   BoyaliCamRo = "DÜZ",
-                                   Nokta = "VAR",
-                                   Urunno = "TOU614BL-1178x325v1",
-                                   Celik = "YOK",
-                                   Pah = "YOK",
-                                   DisOffset = "VAR",
-                                   SolarKontrol = "YOK",
-                                   BaglantiKablosu = "YOK",
-                                   MontajAcisi = "YOK",
-                                   SiparisNo = "25000169",
-                                   SiparisTipi = "SİPARİŞ",
-                                   SiparisTarihi = "06/08/2025",
-                                   SevkTarihi = "20/08/2025",
-                                   CncKesimPrg = "2572",
-                                   CncRouterPrg = "R1826",
-                                   WaterjetPrg = "WJ361DIS-WH361C-WJ361KAPAK",
-                                   ProsesAkisi = "K-R-BM-PC-L-KB-O-A"
+            var veriListesi =
+     (from ie in _db.IsEmirleris
+      join st in _db.Stoklars on ie.StokKod equals st.Kod into stGroup
+      from st in stGroup.DefaultIfEmpty()
+      where evrakNolari.Contains(ie.EvrakNo)
+      select new IsEmriPdfModel
+      {
+          // --- Ana Alanlar ---
+          EvrakNo = ie.EvrakNo,
+          CariSiparisEvrakNo = ie.CariSiparisEvrakno,
 
-                               }).ToList();
+          SiparisTarih = _db.SatisSiparisleris
+                 .Where(s => s.EvrakNo == ie.CariSiparisEvrakno)
+                 .Select(s => s.Tarih)
+                 .FirstOrDefault(),
+
+          TerminTarihi = _db.SatisSiparisKalemleris
+                 .Where(s => s.KalemKodu == ie.CariSiparisKalemKodu)
+                 .Select(s => s.TeslimTarihi)
+                 .FirstOrDefault(),
+
+          MusteriAdi = "",
+          MusteriUlkesi = "",
+
+          // --- Stok Alanları ---
+          StokKodu = ie.StokKod,
+          Marka = st != null ? st.OzelKod01 : "",
+          Model = st != null ? st.OzelKod03 : "",
+          ModelYil = "",
+
+          CamAdi = _db.UrunOzellikleris
+                 .Where(u => u.StokKod == ie.StokKod && u.AnahtarAciklama == "CAM TİPİ")
+                 .Select(u => u.DegerAciklama)
+                 .FirstOrDefault(),
+
+          Seviye = _db.UrunOzellikleris
+                 .Where(u => u.StokKod == ie.StokKod && u.AnahtarAciklama == "SEVIYE")
+                 .Select(u => u.DegerAciklama)
+                 .FirstOrDefault(),
+
+          Kalinlik = _db.UrunOzellikleris
+                 .Where(u => u.StokKod == ie.StokKod && u.AnahtarAciklama == "KALINLIK")
+                 .Select(u => u.DegerAciklama)
+                 .FirstOrDefault(),
+
+          Olcu =
+             (st != null
+                 ? ((int)st.En).ToString() + "x" + ((int)st.Boy).ToString()
+                 : ""),
+
+          Alan =
+             (st != null
+                 ? Math.Round(((decimal)st.En * (decimal)st.Boy) / 1_000_000, 2)
+                 : 0),
+
+          Renk = _db.UrunOzellikleris
+                 .Where(u => u.StokKod == ie.StokKod && u.AnahtarAciklama == "RENK")
+                 .Select(u => u.DegerAciklama)
+                 .FirstOrDefault(),
+
+          FormTipi = "",
+
+          Offset = _db.UrunOzellikleris
+                 .Where(u => u.StokKod == ie.StokKod && u.AnahtarAciklama == "OFSET")
+                 .Select(u => u.DegerAciklama)
+                 .FirstOrDefault(),
+
+          Kusak = _db.UrunOzellikleris
+                 .Where(u => u.StokKod == ie.StokKod && u.AnahtarAciklama == "KUŞAK")
+                 .Select(u => u.DegerAciklama)
+                 .FirstOrDefault(),
+
+          Rezistans = _db.UrunOzellikleris
+                 .Where(u => u.StokKod == ie.StokKod && u.AnahtarAciklama == "REZİSTANS")
+                 .Select(u => u.DegerAciklama)
+                 .FirstOrDefault(),
+
+          GunportDeligi = _db.UrunOzellikleris
+                 .Where(u => u.StokKod == ie.StokKod && u.AnahtarAciklama == "GUNPORT DELİĞİ")
+                 .Select(u => u.DegerAciklama)
+                 .FirstOrDefault(),
+
+          Kenarbant = "",
+          BoyaliCamRodaj = "",
+          Pah = "",
+
+          Tram = _db.UrunOzellikleris
+                 .Where(u => u.StokKod == ie.StokKod && u.AnahtarAciklama == "TRAM")
+                 .Select(u => u.DegerAciklama)
+                 .FirstOrDefault(),
+
+          Trim = _db.UrunOzellikleris
+                 .Where(u => u.StokKod == ie.StokKod && u.AnahtarAciklama == "TRIM")
+                 .Select(u => u.DegerAciklama)
+                 .FirstOrDefault(),
+
+          CelikSac = _db.UrunOzellikleris
+                 .Where(u => u.StokKod == ie.StokKod && u.AnahtarAciklama == "SAC")
+                 .Select(u => u.DegerAciklama)
+                 .FirstOrDefault(),
+
+          BoyaTipi = "",
+          CncKesimNo = "",
+          CncRouterNo = "",
+          SuJetiNo = ""
+      })
+      .ToList();
+
 
             if (veriListesi.Count == 0)
                 return BadRequest("Kayıt bulunamadı.");
@@ -1068,25 +1106,35 @@ namespace erpv01.Controllers
                 // select evrak_no from receteler where stok_kod = 'xxxx' -> Reçeteyi Bul
                 // Sonra ReceteKalemleri'nden detayları çek (KaynakTipi=2 olanlar)
 
-                var receteKalemleri = (from r in _db.Recetelers
-                                       where r.StokKod == kayit.StokKodu // Stok koduna göre reçete bul
-                                    
-                                       join kal in _db.ReceteKalemleris on r.EvrakNo equals kal.EvrakNo
-                                       where kal.KaynakTipi == 2  // Sadece hammaddeler
-                                         && (!string.IsNullOrEmpty(kal.Not1) || !string.IsNullOrEmpty(kal.Not2))   // <-- EKLEDİK
-                                       join hammadde in _db.Stoklars on kal.KaynakKod equals hammadde.Kod into hamGroup
-                                       from hammadde in hamGroup.DefaultIfEmpty()
-                                       orderby kal.SiraNumarasi
-                                       select new ReceteKalemModel
-                                       {
-                                           HammaddeKodu = kal.KaynakKod,
-                                           HammaddeAdi = kal.Not1 != null ? hammadde.Ad : "TANIMSIZ",
-                                           Renk = "BEYAZ",      // SQL'de sabit 'BEYAZ' demiştin (Dinamikse hammadde.Renk yapabiliriz)
-                                           Kalinlik = hammadde != null ? hammadde.Yukseklik.Value.ToString("0.00") : "",    // SQL'de sabit '8mm' demiştin
-                                           YerliIthal = kal.Not2, // SQL'de sabit 'YERLİ' demiştin
-                                           Aciklama = "",
-                                           Kontrol = ""
-                                       }).ToList();
+                var receteKalemleri =
+                 (from re in _db.Recetelers
+                  join rt in _db.ReceteKalemleris on re.EvrakNo equals rt.EvrakNo
+                  where re.StokKod == kayit.StokKodu      // stok koduna göre reçete
+                     && rt.EkAlan4 != ""                  // rt.ek_alan_4 <> ''
+                  orderby rt.SiraNumarasi
+                  select new ReceteKalemModel
+                  {
+                      HammaddeKodu = rt.KaynakKod,         // HM_KODU
+                      HammaddeAdi = rt.EkAlan4,            // HAMMADDE_ADI
+                      Renk = "",                           // SQL'de sabit ''
+                      Kalinlik = _db.Stoklars
+                                 .Where(s => s.Kod == rt.KaynakKod)
+                                 .Select(s => s.Yukseklik)
+                                 .FirstOrDefault()
+                                 .HasValue
+                                     ? _db.Stoklars
+                                        .Where(s => s.Kod == rt.KaynakKod)
+                                        .Select(s => s.Yukseklik.Value)
+                                        .FirstOrDefault()
+                                        .ToString("0.##")
+                                     : "",
+                      Tip = _db.Stoklars
+                            .Where(s => s.Kod == rt.KaynakKod)
+                            .Select(s => s.OzelKod02)
+                            .FirstOrDefault() ?? "",
+                      Aciklama = rt.EkAlan5,               // rt.ek_alan_5
+                      Kontrol = ""
+                  }).ToList();
 
                 kayit.ReceteListesi = receteKalemleri;
             }
@@ -1104,26 +1152,58 @@ namespace erpv01.Controllers
 
     public class IsEmriPdfModel
     {
+        // --- Ana Evrak Bilgileri ---
         public string EvrakNo { get; set; }
-        public string StokKodu { get; set; } // Reçeteyi bulmak için lazım
+        public string CariSiparisEvrakNo { get; set; }
+        public DateTime? SiparisTarih { get; set; }
+        public DateTime? TerminTarihi { get; set; }
+
+        public string MusteriAdi { get; set; }
+        public string MusteriUlkesi { get; set; }
+
+        // --- Stok Bilgileri ---
+        public string StokKodu { get; set; }
+        public string Marka { get; set; }
+        public string Model { get; set; }
+        public string ModelYil { get; set; }
+
+        public string CamAdi { get; set; }
+        public string Seviye { get; set; }
+        public string Kalinlik { get; set; }
+
+        public string Olcu { get; set; }
+        public decimal Alan { get; set; }
+
+        public string Renk { get; set; }
+        public string FormTipi { get; set; } = "";
+        public string Offset { get; set; }
+        public string Kusak { get; set; }
+        public string Rezistans { get; set; }
+        public string GunportDeligi { get; set; }
+
+        public string Kenarbant { get; set; }
+        public string BoyaliCamRodaj { get; set; }
+        public string Pah { get; set; }
+
+        public string Tram { get; set; }
+        public string Trim { get; set; }
+        public string CelikSac { get; set; }
+
+        public string BoyaTipi { get; set; }
+
+        // --- CNC ve Su Jeti ---
+        public string CncKesimNo { get; set; }
+        public string CncRouterNo { get; set; }
+        public string SuJetiNo { get; set; }
+
+        // --- Mevcut PDF Alanları (KENDİ MODELİNDE OLANLAR) ---
         public string ResimUrl { get; set; }
         public string CamKalinlik { get; set; }
         public string Isemrinot { get; set; }
         public string Musteri { get; set; }
         public string Ulke { get; set; }
-        public string Marka { get; set; }
-        public string Model { get; set; }
-        public string Yil { get; set; }
         public string UrunAdi { get; set; }
-        public string Seviye { get; set; }
-        public string Olcu { get; set; }
-        public string Alan { get; set; }
-        public string Renk { get; set; }
         public string Logo { get; set; }
-        public string FormTipi { get; set; }
-        public string Trim { get; set; }
-        public string Offset { get; set; }
-        public string Kusak { get; set; }
         public string Gunport { get; set; }
         public string DelikCapi { get; set; }
         public string PaketYuzeyi { get; set; }
@@ -1137,24 +1217,22 @@ namespace erpv01.Controllers
         public string Nokta { get; set; }
         public string Urunno { get; set; }
         public string Celik { get; set; }
-        public string Pah { get; set; }
         public string DisOffset { get; set; }
         public string SolarKontrol { get; set; }
         public string BaglantiKablosu { get; set; }
         public string MontajAcisi { get; set; }
         public string SiparisNo { get; set; }
-        public string SiparisTipi { get; set; }
-        public string SiparisTarihi { get; set; }
+        public string SiparisTipi { get; set; }     
         public string SevkTarihi { get; set; }
         public string CncKesimPrg { get; set; }
         public string CncRouterPrg { get; set; }
         public string WaterjetPrg { get; set; }
         public string ProsesAkisi { get; set; }
 
-
-        // Yeni Eklediğimiz Liste
-        public List<ReceteKalemModel> ReceteListesi { get; set; } = new List<ReceteKalemModel>();
+        // --- Reçete Kalemleri ---
+        public List<ReceteKalemModel> ReceteListesi { get; set; } = new();
     }
+
 
 
     public class ReceteKalemModel
@@ -1162,6 +1240,7 @@ namespace erpv01.Controllers
         public string HammaddeKodu { get; set; }
         public string HammaddeAdi { get; set; }
         public string Renk { get; set; }
+        public string Tip { get; set; }
         public string Kalinlik { get; set; }
         public string YerliIthal { get; set; } // Tek sütun yaptık
         public string Aciklama { get; set; }

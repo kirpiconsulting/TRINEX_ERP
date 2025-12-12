@@ -556,3 +556,4 @@ C:\Users\KIRPI\Documents\proje\erpv01\obj\Debug\net8.0\refint\erpv01.dll
 C:\Users\KIRPI\Documents\proje\erpv01\obj\Debug\net8.0\erpv01.pdb
 C:\Users\KIRPI\Documents\proje\erpv01\obj\Debug\net8.0\erpv01.genruntimeconfig.cache
 C:\Users\KIRPI\Documents\proje\erpv01\obj\Debug\net8.0\ref\erpv01.dll
+C:\Users\KIRPI\Documents\proje\erpv01\bin\Debug\net8.0\App_PythonScripts\bilgiler.json

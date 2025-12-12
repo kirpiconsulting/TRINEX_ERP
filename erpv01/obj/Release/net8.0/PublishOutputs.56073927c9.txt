@@ -1,6 +1,7 @@
 C:\Users\KIRPI\Documents\proje\erpv01\obj\Release\net8.0\PubTmp\Out\erpv01.exe
 C:\Users\KIRPI\Documents\proje\erpv01\obj\Release\net8.0\PubTmp\Out\appsettings.Development.json
 C:\Users\KIRPI\Documents\proje\erpv01\obj\Release\net8.0\PubTmp\Out\appsettings.json
+C:\Users\KIRPI\Documents\proje\erpv01\obj\Release\net8.0\PubTmp\Out\App_PythonScripts\bilgiler.json
 C:\Users\KIRPI\Documents\proje\erpv01\obj\Release\net8.0\PubTmp\Out\libman.json
 C:\Users\KIRPI\Documents\proje\erpv01\obj\Release\net8.0\PubTmp\Out\LatoFont\Lato-Black.ttf
 C:\Users\KIRPI\Documents\proje\erpv01\obj\Release\net8.0\PubTmp\Out\LatoFont\Lato-BlackItalic.ttf
